@@ -1,0 +1,12 @@
+package com.DR.dLib;
+
+public class dValues {
+
+	public static float VW = 0, VH = 0;
+	
+	public void setVirtualDimensions(float w, float h)
+	{
+		VW = w;
+		VH = h;
+	}
+}

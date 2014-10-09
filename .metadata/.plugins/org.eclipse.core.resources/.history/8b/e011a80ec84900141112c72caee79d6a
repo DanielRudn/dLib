@@ -1,0 +1,6 @@
+package com.DR.dLib;
+
+public class dValues {
+
+	public static float VW = 0, VH = 0;
+}
