@@ -12,8 +12,8 @@ public final class dTweener {
 		return pos+=((target-pos)*speed);
 	}
 	
-	public static float ExponentialEaseOut(float time ,float startPos , float deltaPos, float duration) {
-		return (time==duration) ? startPos+deltaPos : deltaPos * (-(float)Math.pow(2, -10 * time/duration) + 1) + startPos;	
+	public static float ExponentialEaseOut(float time ,float b , float c, float d) {
+		return (time==d) ? b+c : c * (-(float)Math.pow(2, -10 * t/d) + 1) + b;	
 	}
 	
 	public static float ElasticIn(float time, float startPos, float deltaPos, float duration)
