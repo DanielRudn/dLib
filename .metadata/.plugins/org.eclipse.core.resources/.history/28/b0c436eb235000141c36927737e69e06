@@ -47,7 +47,6 @@ public class dImage extends dObject {
 	public dImage(float x, float y, TextureRegion region)
 	{
 		super(x,y,new Sprite(region));
-		getSprite().flip(false, true);
 		setUpdatable(false);
 	}
 	
