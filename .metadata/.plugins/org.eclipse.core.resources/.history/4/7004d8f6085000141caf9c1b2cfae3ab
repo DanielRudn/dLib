@@ -18,7 +18,7 @@ public final class dTweener {
 	
 	public static float CubicEaseIn(float time, float startPos, float deltaPos, float duration)
 	{
-		return deltaPos*(time/=duration)*time*time + startPos;
+		
 	}
 	
 	public static float ElasticIn(float time, float startPos, float deltaPos, float duration)

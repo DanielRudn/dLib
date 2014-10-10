@@ -146,7 +146,7 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_y8LLIEXcEeShJK0hB-F3bw" elementId="org.eclipse.ui.editorss" selectedElement="_y8LLIUXcEeShJK0hB-F3bw">
-      <children xsi:type="basic:PartStack" xmi:id="_y8LLIUXcEeShJK0hB-F3bw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_QMPokEYBEeShJK0hB-F3bw">
+      <children xsi:type="basic:PartStack" xmi:id="_y8LLIUXcEeShJK0hB-F3bw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_2Sf_MEYHEeShJK0hB-F3bw">
         <tags>newtablook</tags>
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
@@ -174,14 +174,14 @@
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
-          <tags>active</tags>
-          <tags>activeOnClose</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_2Sf_MEYHEeShJK0hB-F3bw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="dTweener.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;dTweener.java&quot; partName=&quot;dTweener.java&quot; title=&quot;dTweener.java&quot; tooltip=&quot;dLib-core/src/com/DR/dLib/dTweener.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/dLib-core/src/com/DR/dLib/dTweener.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;321&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;dTweener.java&quot; partName=&quot;dTweener.java&quot; title=&quot;dTweener.java&quot; tooltip=&quot;dLib-core/src/com/DR/dLib/dTweener.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/dLib-core/src/com/DR/dLib/dTweener.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;676&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
+          <tags>active</tags>
+          <tags>activeOnClose</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_uNOrUEaCEeShXtb3uBR_nw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="dImage.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;dImage.java&quot; partName=&quot;dImage.java&quot; title=&quot;dImage.java&quot; tooltip=&quot;dLib-core/src/com/DR/dLib/dImage.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/dLib-core/src/com/DR/dLib/dImage.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1990&quot; selectionTopPixel=&quot;950&quot;/>&#xD;&#xA;&lt;/editor>"/>
@@ -308,7 +308,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y2nVsEXcEeShJK0hB-F3bw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_u1IUYE57EeS-AbkFTiID9w" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_yjkd70XcEeShJK0hB-F3bw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_1RDckFAIEeSQfrODKx7_uA" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_yjkd70XcEeShJK0hB-F3bw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y2nVsUXcEeShJK0hB-F3bw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -341,7 +341,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y2n8wEXcEeShJK0hB-F3bw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_u1PCEE57EeS-AbkFTiID9w" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_yjhamEXcEeShJK0hB-F3bw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_1RJjMVAIEeSQfrODKx7_uA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_yjhamEXcEeShJK0hB-F3bw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_y2n8wUXcEeShJK0hB-F3bw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
