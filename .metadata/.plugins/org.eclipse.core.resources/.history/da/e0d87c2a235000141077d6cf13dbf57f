@@ -3,7 +3,6 @@ package com.DR.dLib;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class dImage extends dObject {
@@ -41,12 +40,6 @@ public class dImage extends dObject {
 	public dImage(float x, float y, Texture texture)
 	{
 		super(x,y,texture);
-		setUpdatable(false);
-	}
-	
-	public dImage(float x, float y, TextureRegion region)
-	{
-		super(x,y,new Sprite(region));
 		setUpdatable(false);
 	}
 	
