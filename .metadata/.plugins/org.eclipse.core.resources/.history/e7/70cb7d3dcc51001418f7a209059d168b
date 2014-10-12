@@ -57,8 +57,6 @@ public class dImage extends dObject {
 		super(x,y,new Sprite(region));
 		getSprite().flip(false, true);
 		setUpdatable(false);
-		imageWidth = region.getRegionWidth();
-		imageHeight = region.getRegionHeight();
 	}
 	
 	/*===========================================================================

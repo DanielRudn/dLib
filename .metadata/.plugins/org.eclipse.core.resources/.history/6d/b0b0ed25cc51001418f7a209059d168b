@@ -24,32 +24,24 @@ public class dImage extends dObject {
 	public dImage(float x, float y, Sprite sprite) {
 		super(x, y, sprite);
 		setUpdatable(false);
-		imageWidth = sprite.getWidth();
-		imageHeight = sprite.getHeight();
 	}
 	
 	public dImage(Vector2 pos, Texture texture)
 	{
 		super(pos,texture);
 		setUpdatable(false);
-		imageWidth = texture.getWidth();
-		imageHeight = texture.getHeight();
 	}
 	
 	public dImage(Vector2 pos, Sprite sprite)
 	{
 		super(pos,sprite);
 		setUpdatable(false);
-		imageWidth = sprite.getWidth();
-		imageHeight = sprite.getHeight();
 	}
 	
 	public dImage(float x, float y, Texture texture)
 	{
 		super(x,y,texture);
 		setUpdatable(false);
-		imageWidth = texture.getWidth();
-		imageHeight = texture.getHeight();
 	}
 	
 	public dImage(float x, float y, TextureRegion region)
@@ -57,8 +49,6 @@ public class dImage extends dObject {
 		super(x,y,new Sprite(region));
 		getSprite().flip(false, true);
 		setUpdatable(false);
-		imageWidth = region.getRegionWidth();
-		imageHeight = region.getRegionHeight();
 	}
 	
 	/*===========================================================================
