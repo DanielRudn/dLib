@@ -17,7 +17,9 @@ public class dUICard extends dObject {
 	
 	private float cardWidth, cardHeight;
 	private float paddingTop = 8, paddingLeft = 8;
-	private boolean hoverEnabled = false, hasShadow = true, isVisible = true;
+	private boolean hoverEnabled = false, hasShadow = true, isVisible = true, clickable = false;
+	// true when the card is clicked
+	private boolean isClicked = false;
 	public static Color SHADOW_COLOR = new Color(0,0,0,.25f);
 	public static final byte LEFT = 0, CENTER = 1, RIGHT = 2, TOP = 3, BOTTOM = 4, LEFT_NO_PADDING = 5, TOP_NO_PADDING = 6, RIGHT_NO_PADDING = 7, BOTTOM_NO_PADDING = 8;
 	
@@ -149,6 +151,10 @@ public class dUICard extends dObject {
 			{
 				checkHover();
 			}
+			if(clickable)
+			{
+				checkClicked();
+			}
 			for(int x = 0; x < objects.size(); x++)
 			{
 				if(objects.get(x).isUpdatable())
@@ -205,6 +211,20 @@ public class dUICard extends dObject {
 		}
 		else
 		{
+			setAlpha(1f);
+		}
+	}
+	
+	private void checkClicked()
+	{
+		if(getBoundingRectangle().contains(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH)) && Gdx.input.justTouched())
+		{
+			isClicked = true;
+			setAlpha(.6f);
+		}
+		else
+		{
+			isClicked = false;
 			setAlpha(1f);
 		}
 	}
@@ -313,6 +333,11 @@ public class dUICard extends dObject {
 		hasShadow = shadow;
 	}
 	
+	public void setClickable(boolean click)
+	{
+		clickable = click;
+	}
+	
 	public void setWidth(float width)
 	{
 		updateObjectPositionForScale(width, getHeight());
@@ -408,6 +433,16 @@ public class dUICard extends dObject {
 	public boolean isHoverEnabled()
 	{
 		return hoverEnabled;
+	}
+	
+	public boolean isClickable()
+	{
+		return clickable;
+	}
+	
+	public boolean isClicked()
+	{
+		return isClicked;
 	}
 	
 	@Override

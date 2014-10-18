@@ -142,6 +142,11 @@ public class dUICard extends dObject {
 			objects.add(object);
 		}
 	}
+	
+	public void removeObject(int index)
+	{
+		objects.remove(index);
+	}
 
 	@Override
 	public void update(float delta) {
