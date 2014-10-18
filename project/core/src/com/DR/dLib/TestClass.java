@@ -1,8 +1,7 @@
 package com.DR.dLib;
 
 
-import java.util.Random;
-
+import java.util.ArrayList;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -11,7 +10,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TestClass extends ApplicationAdapter {
@@ -23,6 +21,7 @@ public class TestClass extends ApplicationAdapter {
 	Texture ball, card;
 	boolean drawCircle = false;
 	dImage circleCover;
+	dUICardList list;
 	
 	
 	@Override
@@ -58,14 +57,38 @@ public class TestClass extends ApplicationAdapter {
 		playerName.setColor(Color.BLACK);
 		playerPanel.addObject(ball1, dUICard.LEFT, dUICard.CENTER);
 		playerPanel.addObject(playerName, dUICard.CENTER, dUICard.CENTER);
+		
+		// TEMP
+		ArrayList<dUICard> arraylist = new ArrayList<dUICard>();
+		for(int x= 0; x < 10000; x++)
+		{
+			dUICard currentCard = new dUICard(0,0,card);
+			currentCard.setClickable(true);
+			dText name = new dText(0,0,48f,"First Last #" + (x+1));
+			currentCard.setDimensions(dValues.VW - 64f, 128f);
+			currentCard.addObject(name, dUICard.CENTER, dUICard.CENTER);
+			arraylist.add(currentCard);
+		}
+		dUICard titleCard = new dUICard(0,0,card);
+		titleCard.setColor(new Color(26f/256f, 184f/256f, 93f/256f,1f));
+		titleCard.setDimensions(dValues.VW, 64f);
+		titleCard.setHasShadow(false);
+		dText backButton = new dText(0,0,72f," invite");
+		backButton.setColor(Color.WHITE);
+		//titleCard.addObject(backButton, dUICard.LEFT, dUICard.CENTER);
+		titleCard.setAlpha(0);
+		list = new dUICardList(0,0,card,titleCard, arraylist);
+		list.setColor(new Color(46f/256f, 204f/256f, 113f/256f,1f));
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(236f/256f, 240f/256f, 241f/256f,1f);
-		Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		testCard.update(Gdx.graphics.getDeltaTime());
-/*
+		list.update(Gdx.graphics.getDeltaTime());
+
+		/*
 		if(Gdx.input.justTouched())
 		{
 			this.drawCircle = true;
@@ -90,6 +113,7 @@ public class TestClass extends ApplicationAdapter {
 		testCard.render(batch);
 		circleCover.render(batch);
 		playerPanel.render(batch);
+		list.render(batch);
 		batch.end();
 	}
 }
