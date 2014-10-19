@@ -23,8 +23,20 @@ public class dUICardList extends dScreen {
 		
 		titleCard = new dUICard(0,0,texture);
 		titleCard.setDimensions(0, 0);
-		titleCard.setAlpha(0);	
-		setCards(list);
+		titleCard.setAlpha(0);
+		listItems = list;
+		for(int i = 0; i < listItems.size(); i++)
+		{
+			if(i == 0)
+			{
+				addObject(listItems.get(i),dUICard.CENTER, dUICard.TOP);
+				listItems.get(i).setY(listItems.get(i).getY() + titleCard.getHeight());
+			}
+			else
+			{
+				addObjectUnder(listItems.get(i), getIndexOf(listItems.get(i-1)));
+			}
+		}
 		
 		// add title card last so it's drawn in the front, and overlaps the list cards
 		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
@@ -34,7 +46,19 @@ public class dUICardList extends dScreen {
 		super(x, y, texture);
 		
 		this.titleCard = titleCard;
-		setCards(list);
+		listItems = list;
+		for(int i = 0; i < listItems.size(); i++)
+		{
+			if(i == 0)
+			{
+				addObject(listItems.get(i),dUICard.CENTER, dUICard.TOP);
+				listItems.get(i).setY(listItems.get(i).getY() + titleCard.getHeight());
+			}
+			else
+			{
+				addObjectUnder(listItems.get(i), getIndexOf(listItems.get(i-1)));
+			}
+		}
 		
 		// add title card last so it's drawn in the front, and overlaps the list cards
 		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
@@ -51,7 +75,7 @@ public class dUICardList extends dScreen {
 		for(int x = 0; x < listItems.size(); x++)
 		{
 				// lock at top
-				if(listItems.get(0).getY() > titleCard.getHeight() + getPadding())
+				if(listItems.get(0).getY() > titleCard.getHeight() + getPadding() + 16f)
 				{
 					deltaY = 0;
 					listItems.get(x).setY(titleCard.getHeight() + getPadding() + (x)*(listItems.get(x).getHeight() + getPadding() + 16f));
@@ -79,53 +103,6 @@ public class dUICardList extends dScreen {
 	{
 		titleCard = title;
 		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
-	}
-	
-	/**
-	 * adds the card using addObjectUnder and adds it to the array list
-	 * @param card
-	 */
-	public void addCardAsObject(dUICard card)
-	{
-		if(listItems.size() - 2 >= 0)
-		{
-			addObjectUnder(card, getIndexOf(getItem(listItems.size()-2)));
-		}
-		else if(listItems.size() - 1 >= 0)
-		{
-			addObjectUnder(card, getIndexOf(getItem(listItems.size()-1)));
-		}
-		else if(listItems.size() == 0)
-		{
-			addObject(card,dUICard.CENTER, dUICard.TOP);
-			card.setY(card.getY() + titleCard.getHeight());
-		}
-		// make it at pos 0 for transitioning
-		card.setY(-card.getHeight() - getPadding());
-		listItems.add(card);
-	}
-	
-	private void setCards(ArrayList<dUICard> list)
-	{
-		for(int i = 0; i < list.size(); i++)
-		{
-			if(i == 0)
-			{
-				addObject(listItems.get(i),dUICard.CENTER, dUICard.TOP);
-				listItems.get(i).setY(listItems.get(i).getY() + titleCard.getHeight());
-			}
-			else
-			{
-				addObjectUnder(listItems.get(i), getIndexOf(listItems.get(i-1)));
-			}
-		}
-	}
-
-	
-	// shortform of getListItem()
-	public dUICard getItem(int index)
-	{
-		return getListItem(index);
 	}
 	
 	public dUICard getListItem(int index)

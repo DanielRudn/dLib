@@ -100,8 +100,6 @@ public class dUICardList extends dScreen {
 			addObject(card,dUICard.CENTER, dUICard.TOP);
 			card.setY(card.getY() + titleCard.getHeight());
 		}
-		// make it at pos 0 for transitioning
-		card.setY(-card.getHeight() - getPadding());
 		listItems.add(card);
 	}
 	

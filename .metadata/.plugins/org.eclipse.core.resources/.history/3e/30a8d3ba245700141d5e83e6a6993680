@@ -81,28 +81,10 @@ public class dUICardList extends dScreen {
 		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
 	}
 	
-	/**
-	 * adds the card using addObjectUnder and adds it to the array list
-	 * @param card
-	 */
-	public void addCardAsObject(dUICard card)
+	public void addCard(dUICard card)
 	{
-		if(listItems.size() - 2 >= 0)
-		{
-			addObjectUnder(card, getIndexOf(getItem(listItems.size()-2)));
-		}
-		else if(listItems.size() - 1 >= 0)
-		{
-			addObjectUnder(card, getIndexOf(getItem(listItems.size()-1)));
-		}
-		else if(listItems.size() == 0)
-		{
-			addObject(card,dUICard.CENTER, dUICard.TOP);
-			card.setY(card.getY() + titleCard.getHeight());
-		}
-		// make it at pos 0 for transitioning
-		card.setY(-card.getHeight() - getPadding());
 		listItems.add(card);
+		addObjectUnder(card, getIndexOf(listItems.size()-2));
 	}
 	
 	private void setCards(ArrayList<dUICard> list)

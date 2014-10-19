@@ -81,33 +81,11 @@ public class dUICardList extends dScreen {
 		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
 	}
 	
-	/**
-	 * adds the card using addObjectUnder and adds it to the array list
-	 * @param card
-	 */
-	public void addCardAsObject(dUICard card)
+	public void setCards(ArrayList<dUICard> list)
 	{
-		if(listItems.size() - 2 >= 0)
-		{
-			addObjectUnder(card, getIndexOf(getItem(listItems.size()-2)));
-		}
-		else if(listItems.size() - 1 >= 0)
-		{
-			addObjectUnder(card, getIndexOf(getItem(listItems.size()-1)));
-		}
-		else if(listItems.size() == 0)
-		{
-			addObject(card,dUICard.CENTER, dUICard.TOP);
-			card.setY(card.getY() + titleCard.getHeight());
-		}
-		// make it at pos 0 for transitioning
-		card.setY(-card.getHeight() - getPadding());
-		listItems.add(card);
-	}
-	
-	private void setCards(ArrayList<dUICard> list)
-	{
-		for(int i = 0; i < list.size(); i++)
+		clearList();
+		listItems = list;
+		for(int i = 0; i < listItems.size(); i++)
 		{
 			if(i == 0)
 			{
@@ -120,7 +98,16 @@ public class dUICardList extends dScreen {
 			}
 		}
 	}
-
+	
+	private void clearList()
+	{
+		// size - 1, so that we don't remove the title card!
+		for(int x = 0; x < listItems.size()-1; x++)
+		{
+			removeObject(x);
+		}
+		listItems.clear();
+	}
 	
 	// shortform of getListItem()
 	public dUICard getItem(int index)
