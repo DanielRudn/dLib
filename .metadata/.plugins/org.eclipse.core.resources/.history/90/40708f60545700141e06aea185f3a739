@@ -77,7 +77,6 @@ public class dUICardList extends dScreen {
 	
 	public void setTitleCard(dUICard title)
 	{
-		removeObject(getIndexOf(titleCard));
 		titleCard = title;
 		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
 	}
