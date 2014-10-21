@@ -265,6 +265,6 @@ public abstract class dObject {
 	@Override
 	public String toString()
 	{
-		return "[" + this.getClass().getName() + "]: xPos: " + getX() + " yPos: " + getY();
+		return "[" + this.getClass().getName() + "] xPos: " + getX() + " yPos: " + getY();
 	}
 }

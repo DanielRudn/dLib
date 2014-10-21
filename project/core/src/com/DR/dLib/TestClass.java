@@ -60,7 +60,7 @@ public class TestClass extends ApplicationAdapter {
 		
 		// TEMP
 		ArrayList<dUICard> arraylist = new ArrayList<dUICard>();
-		for(int x= 0; x < 10000; x++)
+		for(int x= 0; x < 10; x++)
 		{
 			dUICard currentCard = new dUICard(0,0,card);
 			currentCard.setClickable(true);
@@ -79,6 +79,7 @@ public class TestClass extends ApplicationAdapter {
 		titleCard.setAlpha(0);
 		list = new dUICardList(0,0,card,titleCard, arraylist);
 		list.setColor(new Color(46f/256f, 204f/256f, 113f/256f,1f));
+		System.out.println(list +"\n" + titleCard);
 	}
 
 	@Override
