@@ -18,12 +18,6 @@ public abstract class dScreen extends dUICard {
 	 */
 	public abstract void back();
 	
-	/**
-	 * Switch screens to provided screen, transitions, etc up to the current screen
-	 * @param newScreen screen that will be switched to 
-	 */
-	public abstract void switchScreen(dScreen newScreen);
-	
 	public void pause()
 	{
 		isPaused = true;

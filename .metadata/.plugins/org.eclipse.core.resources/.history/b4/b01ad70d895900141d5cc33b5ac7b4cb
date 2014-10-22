@@ -139,4 +139,13 @@ public abstract class dUICardList extends dScreen {
 	{
 		return listItems.size();
 	}
+
+	@Override
+	public void back() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public abstract void switchScreen(dScreen newScreen);
+
 }

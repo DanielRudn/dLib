@@ -77,6 +77,9 @@ public class TestClass extends ApplicationAdapter {
 		backButton.setColor(Color.WHITE);
 		//titleCard.addObject(backButton, dUICard.LEFT, dUICard.CENTER);
 		titleCard.setAlpha(0);
+		list = new dUICardList(0,0,card,titleCard, arraylist);
+		list.setColor(new Color(46f/256f, 204f/256f, 113f/256f,1f));
+		System.out.println(list +"\n" + titleCard);
 	}
 
 	@Override

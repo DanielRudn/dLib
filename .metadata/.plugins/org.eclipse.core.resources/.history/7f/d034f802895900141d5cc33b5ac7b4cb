@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-public abstract class dUICardList extends dScreen {
+public class dUICardList extends dScreen {
 
 	/*
 	 * a dUICard container that allows user to scroll through lists, like a ListView from android.
@@ -139,4 +139,17 @@ public abstract class dUICardList extends dScreen {
 	{
 		return listItems.size();
 	}
+
+	@Override
+	public void back() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public abstract void switchScreen(dScreen newScreen) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
