@@ -16,7 +16,7 @@ public abstract class dScreen extends dUICard {
 	/**
 	 * User clicked back button
 	 */
-	public abstract void goBack();
+	public abstract void back();
 	
 	/**
 	 * Switch screens to provided screen, transitions, etc up to the current screen
