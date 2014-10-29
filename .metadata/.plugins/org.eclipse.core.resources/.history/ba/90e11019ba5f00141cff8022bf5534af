@@ -94,16 +94,6 @@ public class dImage extends dObject {
 		getSprite().setTexture(t);
 	}
 	
-	public void setImage(TextureRegion t)
-	{
-		getSprite().setRegion(t);
-	}
-	
-	public void setImage(Sprite t)
-	{
-		getSprite().set(t);
-	}
-	
 	public void setWidth(float width)
 	{
 		imageWidth = width;
