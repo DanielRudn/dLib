@@ -1,0 +1,23 @@
+package com.DR.dLib.animations;
+
+import com.DR.dLib.dTweener;
+import com.DR.dLib.dValues;
+import com.DR.dLib.ui.dImage;
+
+public class ShrinkAnimation extends dAnimation {
+
+	protected float startSize = 5f;
+	
+	public ShrinkAnimation(dImage objectToAnimate , float duration, AnimationStatusListener listener, int ID, float startSize) {
+		super(duration, listener, ID, objectToAnimate);
+		this.startSize = startSize;
+	}
+
+	@Override
+	protected void animate(float time, float duration, float delta) {
+		((dImage)getAnimatedObjects()[0]).setDimensions(dTweener.ExponentialEaseOut(time,startSize, finalSize - startSize, duration)
+				,dTweener.ExponentialEaseOut(time, dValues.VH * 2.5f, - dValues.VH * 2.5f,  duration));
+		getAnimatedObjects()[0].setOriginCenter();
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.DR.dLib;
+
+public class dAnimation {
+
+	private float currentTime = 0;
+	private float duration = 0;
+}

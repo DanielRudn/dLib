@@ -1,0 +1,15 @@
+package com.DR.dLib;
+
+public abstract class dAnimation {
+
+	private float currentTime = 0;
+	private float duration = 0;
+	private boolean isActive = false;
+	private AnimationStatusListener animListener;
+
+	public dAnimation(float time, float duration)
+	{
+		currentTime = time;
+		this.duration = duration;
+	}
+}

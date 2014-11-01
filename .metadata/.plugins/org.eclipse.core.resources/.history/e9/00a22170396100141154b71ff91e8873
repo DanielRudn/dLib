@@ -1,0 +1,21 @@
+package com.DR.dLib;
+
+public interface AnimationStatusListener {
+
+	/**
+	 * When the animation is about to start, do all your custom initializations here
+	 * @param duration length of animation
+	 */
+	public void onAnimationStart(float duration);
+	
+	/**
+	 * Called every time an animation is updated, used for animating elements
+	 * @param time current time of animation
+	 * @param duration length of animation
+	 * @param delta delta time, time between updates
+	 */
+	public void whileAnimating(float time, float duration, float delta);
+	
+	public void onAnimationFinish();
+	
+}

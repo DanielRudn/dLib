@@ -1,0 +1,8 @@
+package com.DR.dLib;
+
+public interface AnimationStatusListener {
+
+	public void onAnimationStart(float duration);
+	
+	public void whileAnimating(float time, float duration, float delta);
+}

@@ -1,0 +1,43 @@
+package com.DR.dLib.animations;
+
+import java.util.ArrayList;
+
+import com.DR.dLib.dObject;
+import com.DR.dLib.dTweener;
+import com.badlogic.gdx.math.Vector2;
+
+public class SlideElasticAnimation extends dAnimation {
+
+	// the distance (final - initial) all objects will move 
+	protected float deltaPosX = 0;
+	protected float deltaPosY = 0;
+	private ArrayList<Float> startPosX;
+	
+	public SlideElasticAnimation(float duration, AnimationStatusListener listener, int ID, float deltaX, float deltaY,  dObject... objectsToAnimate) {
+		super(duration, listener, ID, objectsToAnimate);
+		this.deltaPosX = deltaX;
+		this.deltaPosY = deltaY;
+		startPosX = new ArrayList<Float>();
+	}
+
+	@Override
+	protected void animate(float time, float duration, float delta) {
+		for(int x = 0; x < getAnimatedObjects().length; x++)
+		{
+			getAnimatedObjects()[x].setPos(dTweener.ElasticOut(time,startPosX.get(x), deltaPosX, duration, 6f),
+					dTweener.ElasticOut(time, startPos.get(x).y, deltaPosY, duration, 6f));
+			System.out.println("length: " + getAnimatedObjects().length + " x: " + x + "startX: " + startPos.get(x).x);
+		}
+	}
+
+	@Override
+	public void start()
+	{
+		super.start();
+		startPosX.clear();
+		for(int x = 0; x < getAnimatedObjects().length; x++)
+		{
+			startPosX.add(getAnimatedObjects()[x].getX());
+		}
+	}
+}
