@@ -6,7 +6,7 @@ public class dTimer {
 	private float duration;
 	private float tickTime;
 	private float tickCounter = 0;
-	private TimerListener listener;
+	TimerListener listener;
 	private boolean hasStarted = false;
 	private boolean hasTicked = false;
 	private int ID;
