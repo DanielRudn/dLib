@@ -1,0 +1,71 @@
+package com.DR.dLib;
+
+import java.util.ArrayList;
+
+import com.DR.dLib.animations.SlideInOrderAnimation;
+import com.DR.dLib.ui.dUICard;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class TestClass extends ApplicationAdapter {
+	SpriteBatch batch;
+	static Camera camera;
+	private ArrayList<dUICard> test;
+	private int numCards = 5;
+	private dUICard[] array = new dUICard[numCards];
+	private SlideInOrderAnimation animation;
+	
+	@Override
+	public void create () {
+		
+		batch = new SpriteBatch();
+		camera = new OrthographicCamera( Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		((OrthographicCamera) camera).setToOrtho(true, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		dValues.VW = 480;
+		dValues.VH = 640;
+		dValues.camera = camera;
+		
+		Texture card = new Texture("card.png");
+		test = new ArrayList<dUICard>();		
+		for(int x = 0; x < numCards; x++)
+		{
+			dUICard cCard = new dUICard(-400,x*100, card);
+			cCard.setDimensions(256f, 128f);
+			test.add(cCard);	
+			array[x] = cCard;
+ 		}
+		
+		animation = new SlideInOrderAnimation(2.5f, null, 1234, 416, array);
+	}
+
+	@Override
+	public void render () {
+		Gdx.gl.glClearColor(236f/256f, 240f/256f, 241f/256f,1f);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		if(animation.isActive())
+		{
+			animation.update(Gdx.graphics.getDeltaTime());
+		}
+		
+		if(Gdx.input.isKeyJustPressed(Keys.A))
+		{
+			animation.start();
+		}
+		
+		
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		for(int x=  0; x < test.size(); x++)
+		{
+			test.get(x).update(Gdx.graphics.getDeltaTime());
+			test.get(x).render(batch);
+		}
+		batch.end();
+	}
+}

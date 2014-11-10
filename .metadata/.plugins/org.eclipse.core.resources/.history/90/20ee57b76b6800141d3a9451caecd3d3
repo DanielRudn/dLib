@@ -1,0 +1,76 @@
+package com.DR.dLib;
+
+public class dTimer {
+
+	private float currentTime = 0;
+	private float duration;
+	private float tickTime;
+	private float tickCounter = 0;
+	TimerTickListener listener;
+	private boolean hasStarted = false;
+	
+	/**
+	 * A timer object 
+	 * @param duration amount of time the timer runs
+	 * @param tickTime after every tickTime, the listeners onTick method is called, I.E. if tickTime is one, then onTick is called once per second
+	 * @param listener listener for the timer
+	 */
+	public dTimer(float duration, float tickTime, TimerTickListener listener)
+	{
+		this.duration = duration;
+		this.tickTime = tickTime;
+		this.listener = listener;
+		currentTime = 0;
+	}
+	
+	public void update(float delta)
+	{
+		if(hasStarted && currentTime < duration)
+		{
+			if(tickCounter - tickTime > delta)
+			{
+				listener.onTimerTick();
+				tickCounter = delta;
+			}
+			currentTime+=delta;
+			tickCounter+=delta;
+		}
+		else if(hasStarted && currentTime >= duration)
+		{
+			finish();
+		}
+	}
+	
+	public void start()
+	{
+		hasStarted = true;
+		currentTime = 0;
+		listener.onTimerStart();
+	}
+	
+	public void stop()
+	{
+		finish();
+	}
+	
+	public boolean isRunning()
+	{
+		return hasStarted;
+	}
+	
+	public float getTime()
+	{
+		return currentTime;
+	}
+	
+	public float getDuration()
+	{
+		return duration;
+	}
+	
+	private void finish()
+	{
+		hasStarted = false;
+		listener.onTimerFinish();
+	}
+}

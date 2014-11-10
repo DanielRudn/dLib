@@ -1,0 +1,26 @@
+package com.DR.dLib;
+
+public class dTimer {
+
+	private float currentTime = 0;
+	private float duration;
+	private float tickTime;
+	TimerTickListener listener;
+	private boolean hasStarted = false;
+	
+	public dTimer(float duration, float tickTime, TimerTickListener listener)
+	{
+		this.duration = duration;
+		this.tickTime = tickTime;
+		this.listener = listener;
+		currentTime = 0;
+	}
+	
+	public void update(float delta)
+	{
+		if(currentTime <= duration)
+		{
+			currentTime+=delta;
+		}
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.DR.dLib.TimerTickListener&apos; to &apos;TimerListener&apos;&#x0D;&#x0A;- Original project: &apos;dLib-core&apos;&#x0D;&#x0A;- Original element: &apos;com.DR.dLib.TimerTickListener&apos;&#x0D;&#x0A;- Renamed element: &apos;com.DR.dLib.TimerListener&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;TimerTickListener&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.DR.dLib{TimerTickListener.java[TimerTickListener" matchStrategy="1" name="TimerListener" qualified="false" references="true" similarDeclarations="false" stamp="1415577757467" textual="false" version="1.0"/>
+</session>

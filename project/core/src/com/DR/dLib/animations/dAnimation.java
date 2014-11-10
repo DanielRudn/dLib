@@ -25,13 +25,19 @@ public abstract class dAnimation {
 		if(currentTime < duration)
 		{
 			currentTime+=delta;
-			animationListener.whileAnimating(animationID, currentTime, duration, delta);
+			if(animationListener != null)
+			{
+				animationListener.whileAnimating(animationID, currentTime, duration, delta);
+			}
 			animate(currentTime, duration, delta);
 		}
 		else if(currentTime >= duration)
 		{
 			isActive = false;
-			animationListener.onAnimationFinish(animationID);
+			if(animationListener != null)
+			{
+				animationListener.onAnimationFinish(animationID);
+			}
 		}
 	}
 	
@@ -46,7 +52,10 @@ public abstract class dAnimation {
 	{
 		isActive = true;
 		currentTime = 0;
-		animationListener.onAnimationStart(animationID, duration);
+		if(animationListener != null)
+		{
+			animationListener.onAnimationStart(animationID, duration);
+		}
 	}
 	
 	public void stop()

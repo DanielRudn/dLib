@@ -1,0 +1,11 @@
+package com.DR.dLib;
+
+public interface TimerTickListener {
+
+	public void onTimerStart();
+	
+	public void onTimerTick();
+	
+	public void onTimerFinish();
+	
+}

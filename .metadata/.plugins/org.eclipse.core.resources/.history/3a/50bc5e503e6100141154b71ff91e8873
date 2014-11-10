@@ -1,9 +1,0 @@
-package com.DR.dLib;
-
-public class SlideFromTopAnimation extends dAnimation {
-
-	public SlideFromTopAnimation(dObject objectToAnimate, float duration, AnimationStatusListener listener, int ID) {
-		super(objectToAnimate, duration, listener, ID);
-	}
-
-}

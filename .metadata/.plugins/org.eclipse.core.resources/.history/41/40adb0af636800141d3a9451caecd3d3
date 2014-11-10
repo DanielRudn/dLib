@@ -1,0 +1,5 @@
+package com.DR.dLib.animations;
+
+public class SlideInOrderAnimation extends dAnimation {
+
+}

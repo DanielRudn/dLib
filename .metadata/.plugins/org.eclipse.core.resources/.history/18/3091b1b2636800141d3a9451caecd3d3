@@ -1,0 +1,13 @@
+package com.DR.dLib.animations;
+
+import com.DR.dLib.dObject;
+
+public class SlideInOrderAnimation extends dAnimation {
+
+	public SlideInOrderAnimation(float duration,
+			AnimationStatusListener listener, int ID, dObject[] objectToAnimate) {
+		super(duration, listener, ID, objectToAnimate);
+		// TODO Auto-generated constructor stub
+	}
+
+}
