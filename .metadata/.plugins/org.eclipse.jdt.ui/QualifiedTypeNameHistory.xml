@@ -10,11 +10,16 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.TextureRegion"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Texture.TextureFilter"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Color"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Texture"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
 <fullyQualifiedTypeName name="com.DR.dLib.dObject"/>
 <fullyQualifiedTypeName name="com.DR.dLib.animations.dAnimation"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.math.Vector2"/>
+<fullyQualifiedTypeName name="com.DR.dLib.dTweener"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Texture"/>
+<fullyQualifiedTypeName name="com.DR.dLib.animations.SlideInOrderAnimation"/>
+<fullyQualifiedTypeName name="com.DR.dLib.ui.dText"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Color"/>
+<fullyQualifiedTypeName name="com.DR.dLib.ui.dUICard"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Input.Keys"/>
 </qualifiedTypeNameHistroy>

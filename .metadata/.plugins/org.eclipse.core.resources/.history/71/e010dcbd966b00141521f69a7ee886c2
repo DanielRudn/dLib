@@ -129,6 +129,7 @@ public abstract class dUICardList extends dScreen {
 	{
 		listItems.clear();
 	}
+
 	
 	// shortform of getListItem()
 	public dUICard getItem(int index)
