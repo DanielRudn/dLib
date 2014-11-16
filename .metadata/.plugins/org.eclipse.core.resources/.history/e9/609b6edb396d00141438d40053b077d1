@@ -35,7 +35,6 @@ public class SlideElasticAnimation extends dAnimation {
 	{
 		super.start();
 		startPosX.clear();
-		startPosY.clear();
 		for(int x = 0; x < getAnimatedObjects().length; x++)
 		{
 			startPosX.add(getAnimatedObjects()[x].getX());

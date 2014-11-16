@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.DR.dLib.dObject;
 import com.DR.dLib.dTweener;
+import com.badlogic.gdx.math.Vector2;
 
 public class SlideExponentialAnimation extends dAnimation {
 
@@ -24,8 +25,8 @@ public class SlideExponentialAnimation extends dAnimation {
 	{
 		for(int x = 0; x < getAnimatedObjects().length; x++)
 		{
-			getAnimatedObjects()[x].setPos(dTweener.ExponentialEaseOut(time, startX.get(x), deltaX, duration),
-					dTweener.ExponentialEaseOut(time, startY.get(x), deltaY, duration));
+			getAnimatedObjects()[x].setPos(dTweener.ExponentialEaseOut(time, startPos.get(x).x, deltaX, duration),
+					dTweener.ExponentialEaseOut(time, startPos.get(x).y, deltaY, duration));
 		}
 	}
 	
@@ -33,12 +34,10 @@ public class SlideExponentialAnimation extends dAnimation {
 	public void start()
 	{
 		super.start();
-		startX.clear();
-		startY.clear();
+		startPos.clear();
 		for(int x = 0; x < getAnimatedObjects().length; x++)
 		{
-			startX.add(getAnimatedObjects()[x].getX());
-			startY.add(getAnimatedObjects()[x].getY());
+			startPos.add(getAnimatedObjects()[x].getPos());
 		}
 	}
 

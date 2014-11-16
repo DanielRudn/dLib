@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.DR.dLib.dObject;
 import com.DR.dLib.dTweener;
+import com.badlogic.gdx.math.Vector2;
 
 public class SlideExponentialAnimation extends dAnimation {
 
