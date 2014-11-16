@@ -1,0 +1,5 @@
+package com.DR.dLib.animations;
+
+public class SlideExponentialAnimation extends dAnimation {
+
+}

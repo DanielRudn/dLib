@@ -1,0 +1,11 @@
+package com.DR.dLib.animations;
+
+import com.DR.dLib.dObject;
+
+public class SlideExponentialAnimation extends dAnimation {
+
+	public SlideExponentialAnimation(float duration, AnimationStatusListener listener, int ID, dObject[] objectToAnimate) {
+		super(duration, listener, ID, objectToAnimate);
+	}
+
+}

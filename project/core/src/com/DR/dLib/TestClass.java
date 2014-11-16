@@ -17,7 +17,6 @@ import com.badlogic.gdx.math.Vector2;
 public class TestClass extends ApplicationAdapter{
 	SpriteBatch batch;
 	static Camera camera;
-	private dGraph test;
 	
 	@Override
 	public void create () {
@@ -28,17 +27,6 @@ public class TestClass extends ApplicationAdapter{
 		dValues.VW = 480;
 		dValues.VH = 640;
 		dValues.camera = camera;
-		Texture axis = new Texture(Gdx.files.internal("card.png"));
-		axis.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-	//	test = new dGraph(180,360, axis,720f,480f, "Score Last 5 Games");
-		test = new dGraph(100,100, axis,256f,128f, "Score Last 5 Games");
-		ArrayList<Vector2> points = new ArrayList<Vector2>();
-		points.add(new Vector2(0,MathUtils.random(0, 10000000)));
-		points.add(new Vector2(1,MathUtils.random(0, 10000000)));
-		points.add(new Vector2(2,MathUtils.random(0, 10000000)));
-		points.add(new Vector2(3,MathUtils.random(0, 10000000)));
-		points.add(new Vector2(4,MathUtils.random(0, 10000000)));  
-		test.setPoints(points);
 		
 	}
 
@@ -48,7 +36,6 @@ public class TestClass extends ApplicationAdapter{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		test.render(batch);
 		batch.end();
 	}
 
