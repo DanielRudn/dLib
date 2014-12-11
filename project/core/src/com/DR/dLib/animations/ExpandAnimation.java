@@ -29,7 +29,7 @@ public class ExpandAnimation extends dAnimation {
 	public void start()
 	{
 		super.start();
-		getAnimatedObjects()[0].setPos(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH));
+		//getAnimatedObjects()[0].setPos(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH));
 		((dImage)getAnimatedObjects()[0]).setDimensions(0, 0);
 	}
 

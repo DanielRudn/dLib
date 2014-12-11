@@ -1,14 +1,19 @@
 package com.DR.dLib.ui;
 
 import com.DR.dLib.dObject;
+import com.DR.dLib.dTweener;
 import com.DR.dLib.dValues;
+import com.DR.dLib.animations.AnimationStatusListener;
+import com.DR.dLib.animations.ExpandAnimation;
+import com.DR.dLib.animations.dAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class dButton extends dObject {
+public class dButton extends dObject implements AnimationStatusListener {
 
 	/*===========================================================================
 	*								VARIABLES								 	|
@@ -17,6 +22,9 @@ public class dButton extends dObject {
 	private boolean enabled = true, clicked = false;
 	private dText buttonText;
 	private float bWidth, bHeight;
+	private dImage clickCircle = null;
+	private dAnimation circleAnimation = null;
+	private final int CIRCLE_ANIM_ID = 156;
 	
 	/*===========================================================================
 	*							   CONSTRUCTORS								 	|
@@ -37,6 +45,34 @@ public class dButton extends dObject {
 		bWidth = sprite.getWidth();
 		bHeight = sprite.getHeight();
 	}
+	
+	public dButton(float x, float y, Sprite sprite, dText text, Texture circle, float duration)
+	{
+		super(x,y,sprite);
+		buttonText = text;
+		bWidth = sprite.getWidth();
+		bHeight = sprite.getHeight();
+		clickCircle = new dImage(getX(),getY(), circle);
+		clickCircle.setColor(.8f,.8f,.8f,0.25f);
+//		clickCircle.setOriginCenter();
+		clickCircle.setDimensions(0, 0);
+		circleAnimation = new ExpandAnimation(clickCircle, duration, this, CIRCLE_ANIM_ID, clickCircle.getColor(), getWidth()*2f);
+	}
+	
+	public dButton(float x, float y, Sprite sprite, String text, Texture circle, float duration)
+	{
+		super(x, y, sprite);
+		buttonText = new dText(0,0,18f,text);
+		buttonText.setPos(x + getWidth()/2f - buttonText.getWidth()/2f, y + getHeight()/2f - buttonText.getHeight()/2f);
+		buttonText.setColor(Color.WHITE);
+		bWidth = sprite.getWidth();
+		bHeight = sprite.getHeight();
+		clickCircle = new dImage(getX(),getY(), circle);
+		clickCircle.setColor(.8f,.8f,.8f,0.25f);
+//		clickCircle.setOriginCenter();
+		clickCircle.setDimensions(0, 0);
+		circleAnimation = new ExpandAnimation(clickCircle, duration, this, CIRCLE_ANIM_ID, clickCircle.getColor(), getWidth()*2f);
+	}
 
 
 	/*===========================================================================
@@ -49,12 +85,26 @@ public class dButton extends dObject {
 		{
 			checkClicked();
 		}
+		if(circleAnimation != null && circleAnimation.isActive())
+		{
+			circleAnimation.update(delta);
+		}
 	}
 
 	@Override
 	public void render(SpriteBatch batch) {
-		getSprite().draw(batch);
-		buttonText.render(batch);
+		if(clickCircle != null)
+		{
+			Gdx.gl.glEnable(Gdx.gl20.GL_SCISSOR_TEST);
+			Gdx.gl.glScissor((int)getX(), (int)(dValues.camera.position.y + dValues.VH /2f - getY() - getHeight()), (int)getWidth(), (int)getHeight());
+			
+			getSprite().draw(batch);
+			buttonText.render(batch);
+			clickCircle.render(batch);
+	
+			batch.flush();
+			Gdx.gl.glDisable(Gdx.gl20.GL_SCISSOR_TEST);
+		}
 	}
 	
 	private void checkClicked()
@@ -62,12 +112,16 @@ public class dButton extends dObject {
 		if(getBoundingRectangle().contains(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH)) && Gdx.input.justTouched())
 		{
 			clicked = true;
-			setAlpha(.6f);
+			if(circleAnimation != null && circleAnimation.isActive() == false)
+			{
+				circleAnimation.start();
+			}
+		//	setAlpha(.6f);
 		}
 		else
 		{
 			clicked = false;
-			setAlpha(1f);
+		//	setAlpha(1f);
 		}
 	}
 	
@@ -190,6 +244,29 @@ public class dButton extends dObject {
 	public String getText()
 	{
 		return buttonText.getText();
+	}
+
+	@Override
+	public void onAnimationStart(int ID, float duration) {
+		if(ID == CIRCLE_ANIM_ID)
+		{
+			clickCircle.setPos(getX(), getY());
+		}
+	}
+
+	@Override
+	public void whileAnimating(int ID, float time, float duration, float delta) {
+		if(ID == CIRCLE_ANIM_ID)
+		{
+			if(time < duration/2f)
+			{
+				clickCircle.setAlpha(dTweener.LinearEase(time, .25f, -.25f, duration/2f));
+			}
+		}
+	}
+
+	@Override
+	public void onAnimationFinish(int ID) {
 	}
 	
 }

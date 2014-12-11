@@ -8,6 +8,7 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="render"/>
 			<item value="clear"/>
 			<item value="visible"/>
 			<item value="hide"/>
@@ -15,7 +16,6 @@
 			<item value="size"/>
 			<item value="setwidth"/>
 			<item value="width"/>
-			<item value="origin"/>
 		</list>
 		<list key="replacehistory">
 			<item value="dValues"/>

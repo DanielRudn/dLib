@@ -53,10 +53,10 @@ public abstract class dUICardList extends dScreen {
 		for(int x = 0; x < listItems.size(); x++)
 		{
 				// lock at top
-				if(listItems.get(0).getY() > titleCard.getHeight() + getPadding())
+				if(listItems.get(0).getY() > getY() +  titleCard.getHeight() + getPadding())
 				{
 					deltaY = 0;
-					listItems.get(x).setY(titleCard.getHeight() + getPadding() + (x)*(listItems.get(x).getHeight() + getPadding() + 16f));
+					listItems.get(x).setY(getY() + titleCard.getHeight() + getPadding() + (x)*(listItems.get(x).getHeight() + getPadding() + 16f));
 				}
 				// lock at bottom
 				else if(listItems.get(listItems.size() - 1).getY() + listItems.get(listItems.size() - 1).getHeight() < getY() + getHeight() - getPadding() && deltaY < 0)
@@ -66,7 +66,7 @@ public abstract class dUICardList extends dScreen {
 				// make the scroll speed slower
 				deltaY = dTweener.MoveToAndSlow(deltaY, 0, delta/listItems.size());
 				listItems.get(x).setY(listItems.get(x).getY() + deltaY);
-				if(listItems.get(x).getY() + listItems.get(x).getHeight() < 0 || listItems.get(x).getY() > dValues.VH + 8f)
+				if(listItems.get(x).getY() + listItems.get(x).getHeight() < getY() || listItems.get(x).getY() > getY() + dValues.VH + 8f)
 				{
 					listItems.get(x).setVisible(false);
 				}
@@ -103,8 +103,6 @@ public abstract class dUICardList extends dScreen {
 			addObject(card,dUICard.CENTER, dUICard.TOP);
 			card.setY(card.getY() + titleCard.getHeight());
 		}
-		// make it at pos 0 for transitioning
-		card.setY(-card.getHeight() - getPadding());
 		listItems.add(card);
 	}
 	
