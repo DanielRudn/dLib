@@ -9,7 +9,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 
 public class dUICard extends dObject {
 	
@@ -24,7 +26,8 @@ public class dUICard extends dObject {
 	private boolean isClicked = false;
 	public static Color SHADOW_COLOR = new Color(0,0,0,.25f);
 	public static final byte LEFT = 0, CENTER = 1, RIGHT = 2, TOP = 3, BOTTOM = 4, LEFT_NO_PADDING = 5, TOP_NO_PADDING = 6, RIGHT_NO_PADDING = 7, BOTTOM_NO_PADDING = 8;
-	
+	private boolean clip = true, pushedScissors = false;
+	private Rectangle scissors = new Rectangle(), clipRect = new Rectangle();
 	private float deltaX = 0, deltaY = 0;//distance moved from last position, used for changing pos of objects
 	
 	private ArrayList<dObject> objects = new ArrayList<dObject>();
@@ -176,24 +179,60 @@ public class dUICard extends dObject {
 	public void render(SpriteBatch batch) {
 		if(isVisible)
 		{
-			if(hasShadow)
-			{
-				getSprite().setColor(SHADOW_COLOR);
-				getSprite().setPosition(getX()+4, getY()+4);
-				getSprite().draw(batch);
-			
-				setColor(getColor());
-				getSprite().setPosition(getX(),getY());
-				getSprite().draw(batch);
+			if(clip)
+			{	
+				if(hasShadow)
+				{
+					getSprite().setColor(SHADOW_COLOR);
+					getSprite().setPosition(getX()+4, getY()+4);
+					getSprite().draw(batch);
+				}
+				batch.flush();
+				clipRect.set(getX(), getY(), getWidth(), getHeight());
+				ScissorStack.calculateScissors(dValues.camera, batch.getTransformMatrix(), clipRect,  scissors);
+				pushedScissors = ScissorStack.pushScissors(scissors);
+				if(hasShadow)
+				{
+					setColor(getColor());
+					getSprite().setPosition(getX(),getY());
+					getSprite().draw(batch);
+				}
+				else
+				{
+					getSprite().draw(batch);
+				}
+				//render objects contained in card
+				for(int x = 0; x < objects.size(); x++)
+				{
+					objects.get(x).render(batch);
+				}
+				batch.flush();
+				if(pushedScissors)
+				{
+					ScissorStack.popScissors();
+				}
 			}
 			else
 			{
-				getSprite().draw(batch);
-			}
-			//render objects contained in card
-			for(int x = 0; x < objects.size(); x++)
-			{
-				objects.get(x).render(batch);
+				if(hasShadow)
+				{
+					getSprite().setColor(SHADOW_COLOR);
+					getSprite().setPosition(getX()+4, getY()+4);
+					getSprite().draw(batch);
+				
+					setColor(getColor());
+					getSprite().setPosition(getX(),getY());
+					getSprite().draw(batch);
+				}
+				else
+				{
+					getSprite().draw(batch);
+				}
+				//render objects contained in card
+				for(int x = 0; x < objects.size(); x++)
+				{
+					objects.get(x).render(batch);
+				}
 			}
 		}
 	}

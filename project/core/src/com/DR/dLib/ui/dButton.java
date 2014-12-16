@@ -11,7 +11,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 
 public class dButton extends dObject implements AnimationStatusListener {
 
@@ -19,12 +21,13 @@ public class dButton extends dObject implements AnimationStatusListener {
 	*								VARIABLES								 	|
 	*===========================================================================*/
 
-	private boolean enabled = true, clicked = false;
+	private boolean enabled = true, clicked = false, pushedScissors = false;
 	private dText buttonText;
 	private float bWidth, bHeight;
 	private dImage clickCircle = null;
 	private dAnimation circleAnimation = null;
 	private final int CIRCLE_ANIM_ID = 156;
+	private Rectangle scissors = new Rectangle(), clip = new Rectangle();
 	
 	/*===========================================================================
 	*							   CONSTRUCTORS								 	|
@@ -95,15 +98,33 @@ public class dButton extends dObject implements AnimationStatusListener {
 	public void render(SpriteBatch batch) {
 		if(clickCircle != null)
 		{
-			Gdx.gl.glEnable(Gdx.gl20.GL_SCISSOR_TEST);
-			Gdx.gl.glScissor((int)getX(), (int)(dValues.camera.position.y + dValues.VH /2f - getY() - getHeight()), (int)getWidth(), (int)getHeight());
-			
+			/*
+			Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
+			Gdx.gl.glScissor((int)getX(),(int)(dValues.camera.position.y + dValues.VH /2f - getY() - getHeight()), (int)getWidth(),	(int)getHeight());
 			getSprite().draw(batch);
 			buttonText.render(batch);
 			clickCircle.render(batch);
 	
 			batch.flush();
-			Gdx.gl.glDisable(Gdx.gl20.GL_SCISSOR_TEST);
+			Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
+			*/
+			batch.flush();
+			clip.set(getX(), getY(), getWidth(), getHeight());
+			ScissorStack.calculateScissors(dValues.camera, batch.getTransformMatrix(), clip,  scissors);
+			pushedScissors = ScissorStack.pushScissors(scissors);
+			getSprite().draw(batch);
+			buttonText.render(batch);
+			clickCircle.render(batch);
+			batch.flush();
+			if(pushedScissors)
+			{
+				ScissorStack.popScissors();
+			}
+		}
+		else
+		{
+			getSprite().draw(batch);
+			buttonText.render(batch);
 		}
 	}
 	
@@ -250,7 +271,7 @@ public class dButton extends dObject implements AnimationStatusListener {
 	public void onAnimationStart(int ID, float duration) {
 		if(ID == CIRCLE_ANIM_ID)
 		{
-			clickCircle.setPos(getX(), getY());
+			clickCircle.setPos(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)) - getWidth() / 2f,dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH) - getHeight());
 		}
 	}
 

@@ -1,9 +1,7 @@
 package com.DR.dLib.animations;
 
 import com.DR.dLib.dTweener;
-import com.DR.dLib.dValues;
 import com.DR.dLib.ui.dImage;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 
 public class ExpandAnimation extends dAnimation {
