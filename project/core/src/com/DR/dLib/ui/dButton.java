@@ -132,10 +132,14 @@ public class dButton extends dObject implements AnimationStatusListener {
 	{
 		if(getBoundingRectangle().contains(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH)) && Gdx.input.justTouched())
 		{
-			clicked = true;
 			if(circleAnimation != null && circleAnimation.isActive() == false)
 			{
 				circleAnimation.start();
+				clicked = true;
+			}
+			else if(circleAnimation == null)
+			{
+				clicked = true;
 			}
 		//	setAlpha(.6f);
 		}

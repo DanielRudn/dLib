@@ -3,7 +3,11 @@ package com.DR.dLib.ui;
 import java.util.ArrayList;
 
 import com.DR.dLib.dObject;
+import com.DR.dLib.dTweener;
 import com.DR.dLib.dValues;
+import com.DR.dLib.animations.AnimationStatusListener;
+import com.DR.dLib.animations.ExpandAnimation;
+import com.DR.dLib.animations.dAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,6 +33,10 @@ public class dUICard extends dObject {
 	private boolean clip = true, pushedScissors = false;
 	private Rectangle scissors = new Rectangle(), clipRect = new Rectangle();
 	private float deltaX = 0, deltaY = 0;//distance moved from last position, used for changing pos of objects
+	// circle cover for when this card is clickable
+	private dImage circleCover = null;
+	private dAnimation clickAnim = null;
+	private final int CIRCLE_ANIM_ID = 98765;
 	
 	private ArrayList<dObject> objects = new ArrayList<dObject>();
 
@@ -148,7 +156,7 @@ public class dUICard extends dObject {
 		}
 	}
 	
-	public void removeObject(int index)
+	public void removeObject(int index) throws ArrayIndexOutOfBoundsException
 	{
 		objects.remove(index);
 	}
@@ -164,6 +172,10 @@ public class dUICard extends dObject {
 			if(clickable)
 			{
 				checkClicked();
+			}
+			if(clickAnim != null && clickAnim.isActive())
+			{
+				clickAnim.update(delta);
 			}
 			for(int x = 0; x < objects.size(); x++)
 			{
@@ -205,6 +217,10 @@ public class dUICard extends dObject {
 				for(int x = 0; x < objects.size(); x++)
 				{
 					objects.get(x).render(batch);
+				}
+				if(circleCover != null)
+				{
+					circleCover.render(batch);
 				}
 				batch.flush();
 				if(pushedScissors)
@@ -266,12 +282,22 @@ public class dUICard extends dObject {
 		if(getBoundingRectangle().contains(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH)) && Gdx.input.justTouched())
 		{
 			isClicked = true;
-			setAlpha(.6f);
+			if(circleCover == null)
+			{
+				setAlpha(.6f);
+			}
+			else
+			{
+				clickAnim.start();
+			}
 		}
 		else
 		{
 			isClicked = false;
-			setAlpha(1f);
+			if(circleCover == null)
+			{
+				setAlpha(1f);
+			}
 		}
 	}
 	
@@ -384,6 +410,37 @@ public class dUICard extends dObject {
 		clickable = click;
 	}
 	
+	public void setClickable(boolean click, Texture circle)
+	{
+		clickable = click;
+		circleCover = new dImage(getX(), getY(),circle);
+		//circleCover.setColor(.8f,.8f,.8f,0.25f);
+		circleCover.setColor(0,0,0,0.25f);
+		circleCover.setDimensions(0, 0);
+		clickAnim = new ExpandAnimation(circleCover, 2f, new AnimationStatusListener()
+		{
+
+			@Override
+			public void onAnimationStart(int ID, float duration) {
+				circleCover.setPos(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)) - getWidth() / 2f,dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH) - getHeight());
+			}
+
+			@Override
+			public void whileAnimating(int ID, float time, float duration,float delta) {
+				if(time < duration/2f)
+				{
+					circleCover.setAlpha(dTweener.LinearEase(time, .25f, -.25f, duration/2f));
+				}
+			}
+
+			@Override
+			public void onAnimationFinish(int ID) {
+				
+			}
+			
+		}, CIRCLE_ANIM_ID, circleCover.getColor(), getWidth()*2f);
+	}
+	
 	public void setWidth(float width)
 	{
 		updateObjectPositionForScale(width, getHeight());
@@ -470,6 +527,11 @@ public class dUICard extends dObject {
 	public void setVisible(boolean v)
 	{
 		isVisible = v;
+	}
+	
+	public void setClipping(boolean c)
+	{
+		clip = c;
 	}
 	
 	/*===========================================================================

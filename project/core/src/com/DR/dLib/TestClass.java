@@ -2,7 +2,6 @@ package com.DR.dLib;
 
 import java.util.ArrayList;
 
-import com.DR.dLib.ui.dButton;
 import com.DR.dLib.ui.dText;
 import com.DR.dLib.ui.dUICard;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.Net.HttpResponse;
 import com.badlogic.gdx.Net.HttpResponseListener;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -67,6 +65,7 @@ public class TestClass extends ApplicationAdapter implements HttpResponseListene
 		for(int x = 0; x < shopItems.size(); x++)
 		{
 			shopItems.get(x).render(batch);
+			shopItems.get(x).update(Gdx.graphics.getDeltaTime());
 		}
 		if(itemCard != null)
 		{
@@ -117,7 +116,8 @@ public class TestClass extends ApplicationAdapter implements HttpResponseListene
 					MOTD = new dText(25,25,64f,shop.get("MOTD"));
 				}
 			});
-		for(int x = 0; x < shop.getChildrenByName("Item").size; x++)
+	//	for(int x = 0; x < shop.getChildrenByName("Item").size; x++)
+		for(int x = 0; x < 2; x++)
 		{
 			final Element e = shop.getChildrenByName("Item").get(x);
 			final int currentIndex = x;
@@ -127,7 +127,7 @@ public class TestClass extends ApplicationAdapter implements HttpResponseListene
 				@Override
 				public void run() {
 					itemCard = new dUICard(0,0,card);
-					itemCard.setClickable(true);
+					itemCard.setClickable(true, new Texture("circle.png"));
 					itemCard.setDimensions(128, 128);
 					itemCard.setPos(50,150 + currentIndex*150);
 					dText id = new dText(0,0,48f,e.get("id"));

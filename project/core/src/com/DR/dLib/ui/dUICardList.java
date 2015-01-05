@@ -23,13 +23,11 @@ public abstract class dUICardList extends dScreen {
 	public dUICardList(float x, float y, Texture texture, ArrayList<dUICard> list) {
 		super(x, y, texture);
 		
-		titleCard = new dUICard(0,0,texture);
+		titleCard = new dUICard(getX(),getY(),texture);
 		titleCard.setDimensions(0, 0);
 		titleCard.setAlpha(0);	
 		setCards(list);
 		
-		// add title card last so it's drawn in the front, and overlaps the list cards
-		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
 	}
 	
 	public dUICardList(float x, float y, Texture texture, dUICard titleCard, ArrayList<dUICard> list) {
@@ -37,9 +35,7 @@ public abstract class dUICardList extends dScreen {
 		
 		this.titleCard = titleCard;
 		setCards(list);
-		
-		// add title card last so it's drawn in the front, and overlaps the list cards
-		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
+
 	}
 	
 	@Override
@@ -79,7 +75,10 @@ public abstract class dUICardList extends dScreen {
 	
 	public void setTitleCard(dUICard title)
 	{
-		removeObject(getIndexOf(titleCard));
+		if(getIndexOf(titleCard) != -1)
+		{
+			removeObject(getIndexOf(titleCard));
+		}
 		titleCard = title;
 		addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
 	}
@@ -90,6 +89,7 @@ public abstract class dUICardList extends dScreen {
 	 */
 	public void addCardAsObject(dUICard card)
 	{
+		/*
 		if(listItems.size() - 2 >= 0)
 		{
 			addObjectUnder(card, getIndexOf(getItem(listItems.size()-2)));
@@ -102,8 +102,27 @@ public abstract class dUICardList extends dScreen {
 		{
 			addObject(card,dUICard.CENTER, dUICard.TOP);
 			card.setY(card.getY() + titleCard.getHeight());
+		}*/
+		if(listItems.size() == 0)
+		{
+			addObject(card,dUICard.CENTER, dUICard.TOP);
+			card.setY(card.getY() + titleCard.getHeight());
+		}
+		else
+		{
+			addObjectUnder(card,dUICard.CENTER, listItems.size()-1);
+			card.setY(listItems.get(listItems.size()-1).getY() + listItems.get(listItems.size()-1).getHeight() + getPadding());
 		}
 		listItems.add(card);
+		// remove and re-add the title card so that it's last to be drawn
+		if(getIndexOf(titleCard) != listItems.size()-1)
+		{
+			try
+			{
+				removeObject(getIndexOf(titleCard));
+			}catch(ArrayIndexOutOfBoundsException aioobe){}
+			addObject(titleCard,dUICard.LEFT_NO_PADDING, dUICard.TOP_NO_PADDING);
+		}
 	}
 	
 	private void setCards(ArrayList<dUICard> list)
@@ -137,6 +156,11 @@ public abstract class dUICardList extends dScreen {
 	public dUICard getListItem(int index)
 	{
 		return listItems.get(index);
+	}
+	
+	public ArrayList<dUICard> getList()
+	{
+		return listItems;
 	}
 	
 	public int getSize()
