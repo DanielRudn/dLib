@@ -207,6 +207,13 @@ public class dButton extends dObject implements AnimationStatusListener {
 		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
 	}
 	
+	@Override
+	public void setAlpha(float a)
+	{
+		super.setAlpha(a);
+		buttonText.setAlpha(a);
+	}
+	
 	public void setText(String text)
 	{
 		buttonText.setText(text);

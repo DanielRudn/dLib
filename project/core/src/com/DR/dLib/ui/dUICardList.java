@@ -49,10 +49,10 @@ public abstract class dUICardList extends dScreen {
 		for(int x = 0; x < listItems.size(); x++)
 		{
 				// lock at top
-				if(listItems.get(0).getY() > getY() +  titleCard.getHeight() + getPadding())
+				if(listItems.get(0).getY() > getY() + titleCard.getHeight() + getPadding())
 				{
 					deltaY = 0;
-					listItems.get(x).setY(getY() + titleCard.getHeight() + getPadding() + (x)*(listItems.get(x).getHeight() + getPadding() + 16f));
+					listItems.get(x).setY(getY() + titleCard.getHeight() + getPadding() + (x)*(listItems.get(x).getHeight() + getPadding()));
 				}
 				// lock at bottom
 				else if(listItems.get(listItems.size() - 1).getY() + listItems.get(listItems.size() - 1).getHeight() < getY() + getHeight() - getPadding() && deltaY < 0)
@@ -166,5 +166,10 @@ public abstract class dUICardList extends dScreen {
 	public int getSize()
 	{
 		return listItems.size();
+	}
+	
+	public float getScrollDelta()
+	{
+		return deltaY;
 	}
 }

@@ -14,6 +14,7 @@ public class dText extends dObject {
 	*								VARIABLES								 	|
 	*===========================================================================*/
 	
+//	public static final BitmapFont GAME_FONT = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font_0.tga"),true);
 	public static final BitmapFont GAME_FONT = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font_0.tga"),true);
 	public static final float FONT_SIZE = 128f; // size of the bitmap font that was decided on creation of the font.fnt file.
 	private String text;

@@ -1,0 +1,220 @@
+package com.DR.dLib;
+
+import com.DR.dLib.ui.dImage;
+import com.DR.dLib.ui.dUICard;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
+public class TestClass extends ApplicationAdapter{
+	SpriteBatch batch;
+	static Camera camera;
+	dImage test, test1, test2, test3, test4, test5, test6, test7,test8, test9, test10, test11, test12,test13,test14,
+	test15,test16,test17,test18,test19,test20,test21,test22,test23,test24;
+	dUICard card;
+	
+	@Override
+	public void create () {
+		
+		batch = new SpriteBatch();
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		((OrthographicCamera) camera).setToOrtho(true, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		dValues.VW = 480;
+		dValues.VH = 640;
+		dValues.camera = camera;
+		
+		test = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test.setDimensions(32, 32);
+		test.setHasShadow(false);
+		test.setColor(Color.TEAL);
+		
+		test1 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test1.setDimensions(32, 32);
+		test1.setHasShadow(false);
+		test1.setColor(Color.GRAY);
+		
+		test2 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test2.setDimensions(32, 32);
+		test2.setHasShadow(false);
+		test2.setColor(Color.GREEN);
+		
+		test3 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test3.setDimensions(32, 32);
+		test3.setHasShadow(false);
+		test3.setColor(Color.RED);
+		
+		test4 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test4.setDimensions(32, 32);
+		test4.setHasShadow(false);
+		test4.setColor(Color.BLUE);
+		
+		// mid_top
+		test5 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test5.setDimensions(32, 32);
+		test5.setHasShadow(false);
+		test5.setColor(Color.TEAL);
+		
+		test6 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test6.setDimensions(32, 32);
+		test6.setHasShadow(false);
+		test6.setColor(Color.GRAY);
+		
+		test7 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test7.setDimensions(32, 32);
+		test7.setHasShadow(false);
+		test7.setColor(Color.GREEN);
+		
+		test8 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test8.setDimensions(32, 32);
+		test8.setHasShadow(false);
+		test8.setColor(Color.RED);
+		
+		test9 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test9.setDimensions(32, 32);
+		test9.setHasShadow(false);
+		test9.setColor(Color.BLUE);
+		
+		// CENTER
+		
+		test10 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test10.setDimensions(32, 32);
+		test10.setHasShadow(false);
+		test10.setColor(Color.TEAL);
+		
+		test11 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test11.setDimensions(32, 32);
+		test11.setHasShadow(false);
+		test11.setColor(Color.GRAY);
+		
+		test12 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test12.setDimensions(32, 32);
+		test12.setHasShadow(false);
+		test12.setColor(Color.GREEN);
+		
+		test13 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test13.setDimensions(32, 32);
+		test13.setHasShadow(false);
+		test13.setColor(Color.RED);
+		
+		test14 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test14.setDimensions(32, 32);
+		test14.setHasShadow(false);
+		test14.setColor(Color.BLUE);
+		
+		// MID_BOTTOM
+	
+		test15 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test15.setDimensions(32, 32);
+		test15.setHasShadow(false);
+		test15.setColor(Color.TEAL);
+		
+		test16 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test16.setDimensions(32, 32);
+		test16.setHasShadow(false);
+		test16.setColor(Color.GRAY);
+		
+		test17 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test17.setDimensions(32, 32);
+		test17.setHasShadow(false);
+		test17.setColor(Color.GREEN);
+		
+		test18 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test18.setDimensions(32, 32);
+		test18.setHasShadow(false);
+		test18.setColor(Color.RED);
+		
+		test19 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test19.setDimensions(32, 32);
+		test19.setHasShadow(false);
+		test19.setColor(Color.BLUE);
+		
+		// BOTTOM
+		
+		test20 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test20.setDimensions(32, 32);
+		test20.setHasShadow(false);
+		test20.setColor(Color.TEAL);
+		
+		test21 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test21.setDimensions(32, 32);
+		test21.setHasShadow(false);
+		test21.setColor(Color.GRAY);
+		
+		test22 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test22.setDimensions(32, 32);
+		test22.setHasShadow(false);
+		test22.setColor(Color.GREEN);
+		
+		test23 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test23.setDimensions(32, 32);
+		test23.setHasShadow(false);
+		test23.setColor(Color.RED);
+		
+		test24 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test24.setDimensions(32, 32);
+		test24.setHasShadow(false);
+		test24.setColor(Color.BLUE);
+		
+		// CARD
+		
+		card = new dUICard(0,0,new Texture("card.png"));
+		card.setDimensions(256, 256);
+		
+		card.addObject(test, dUICard.LEFT, dUICard.TOP);
+		card.addObject(test1, dUICard.MID_LEFT, dUICard.TOP);
+		card.addObject(test2, dUICard.CENTER, dUICard.TOP);
+		card.addObject(test3, dUICard.MID_RIGHT, dUICard.TOP);
+		card.addObject(test4, dUICard.RIGHT, dUICard.TOP);
+		
+		card.addObject(test5, dUICard.LEFT, dUICard.MID_TOP);
+		card.addObject(test6, dUICard.MID_LEFT, dUICard.MID_TOP);
+		card.addObject(test7, dUICard.CENTER, dUICard.MID_TOP);
+		card.addObject(test8, dUICard.MID_RIGHT, dUICard.MID_TOP);
+		card.addObject(test9, dUICard.RIGHT, dUICard.MID_TOP);
+		
+		card.addObject(test10, dUICard.LEFT, dUICard.CENTER);
+		card.addObject(test11, dUICard.MID_LEFT, dUICard.CENTER);
+		card.addObject(test12, dUICard.CENTER, dUICard.CENTER);
+		card.addObject(test13, dUICard.MID_RIGHT, dUICard.CENTER);
+		card.addObject(test14, dUICard.RIGHT, dUICard.CENTER);
+		
+		card.addObject(test15, dUICard.LEFT, dUICard.MID_BOTTOM);
+		card.addObject(test16, dUICard.MID_LEFT, dUICard.MID_BOTTOM);
+		card.addObject(test17, dUICard.CENTER, dUICard.MID_BOTTOM);
+		card.addObject(test18, dUICard.MID_RIGHT, dUICard.MID_BOTTOM);
+		card.addObject(test19, dUICard.RIGHT, dUICard.MID_BOTTOM);
+		
+		card.addObject(test20, dUICard.LEFT, dUICard.BOTTOM);
+		card.addObject(test21, dUICard.MID_LEFT, dUICard.BOTTOM);
+		card.addObject(test22, dUICard.CENTER, dUICard.BOTTOM);
+		card.addObject(test23, dUICard.MID_RIGHT, dUICard.BOTTOM);
+		card.addObject(test24, dUICard.RIGHT, dUICard.BOTTOM);
+	}
+
+	@Override
+	public void render () {
+		Gdx.gl.glClearColor(41f/256f, 128f/256f, 185f/256f,1f);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.setProjectionMatrix(camera.combined);
+
+		
+		batch.begin();
+		card.render(batch);
+		batch.end();
+
+	
+	}
+
+
+}

@@ -2,26 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="circleCover" key="selection"/>
+		<item value="32" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="circlecover"/>
-			<item value="clickco"/>
-			<item value="update"/>
-			<item value="clickAnim"/>
-			<item value="circleAnim"/>
-			<item value="isclicked"/>
-			<item value="clicked"/>
-			<item value="circleCover"/>
+			<item value="32"/>
+			<item value="64"/>
+			<item value="test"/>
+			<item value="TOP"/>
+			<item value="test3"/>
+			<item value="128"/>
+			<item value="distanceLinePoint"/>
+			<item value="setalpha"/>
 		</list>
 		<list key="replacehistory">
-			<item value="dValues"/>
-			<item value="Gdx.graphics.getWidth()"/>
-			<item value="Gdx.graphics.getHeight()"/>
-			<item value="TestClass"/>
+			<item value="32"/>
+			<item value="test5"/>
+			<item value="MID_TOP"/>
+			<item value="test4"/>
+			<item value="64"/>
+			<item value="test3"/>
+			<item value="test2"/>
+			<item value="test1"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

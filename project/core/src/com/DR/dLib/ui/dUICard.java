@@ -22,14 +22,22 @@ public class dUICard extends dObject {
 	/*===========================================================================
 	*								VARIABLES								 	|
 	*===========================================================================*/
-	
+	// Static identifiers for placing objects onto this card
+	// HORIZONTAL PLACEMENT IDENTIFIERS
+	public static final byte LEFT = 0, RIGHT = 2, LEFT_NO_PADDING = 5, RIGHT_NO_PADDING = 7;
+	// BOTH 
+	public static final byte CENTER = 1; 
+	// VERTICAL  PLACEMENT IDENTIFIERS
+	public static final byte TOP = 3, BOTTOM = 4, TOP_NO_PADDING = 6, BOTTOM_NO_PADDING = 8;
+	// Dimensions of the card
 	private float cardWidth, cardHeight;
+	// padding between objects 
 	private float paddingTop = 8, paddingLeft = 8;
 	private boolean hoverEnabled = false, hasShadow = true, isVisible = true, clickable = false;
 	// true when the card is clicked
 	private boolean isClicked = false;
 	public static Color SHADOW_COLOR = new Color(0,0,0,.25f);
-	public static final byte LEFT = 0, CENTER = 1, RIGHT = 2, TOP = 3, BOTTOM = 4, LEFT_NO_PADDING = 5, TOP_NO_PADDING = 6, RIGHT_NO_PADDING = 7, BOTTOM_NO_PADDING = 8;
+	// whether to clip when drawing
 	private boolean clip = true, pushedScissors = false;
 	private Rectangle scissors = new Rectangle(), clipRect = new Rectangle();
 	private float deltaX = 0, deltaY = 0;//distance moved from last position, used for changing pos of objects
@@ -140,7 +148,7 @@ public class dUICard extends dObject {
 	{
 		if(index >= 0)
 		{
-			object.setX(objects.get(index).getX() + paddingTop + objects.get(index).getWidth());
+			object.setX(objects.get(index).getX() + paddingLeft + objects.get(index).getWidth());
 			object.setY(objects.get(index).getY() + objects.get(index).getHeight() - object.getHeight());
 			objects.add(object);
 		}
@@ -150,7 +158,7 @@ public class dUICard extends dObject {
 	{
 		if(index >= 0)
 		{
-			object.setX(objects.get(index).getX() - paddingTop - objects.get(index).getWidth());
+			object.setX(objects.get(index).getX() - paddingLeft - objects.get(index).getWidth());
 			object.setY(objects.get(index).getY() + objects.get(index).getHeight() - object.getHeight());
 			objects.add(object);
 		}
@@ -175,6 +183,7 @@ public class dUICard extends dObject {
 			}
 			if(clickAnim != null && clickAnim.isActive())
 			{
+				System.out.println("updating clickAnim");
 				clickAnim.update(delta);
 			}
 			for(int x = 0; x < objects.size(); x++)
@@ -289,6 +298,7 @@ public class dUICard extends dObject {
 			else
 			{
 				clickAnim.start();
+				System.out.println("clickAnim Started");
 			}
 		}
 		else
@@ -414,7 +424,6 @@ public class dUICard extends dObject {
 	{
 		clickable = click;
 		circleCover = new dImage(getX(), getY(),circle);
-		//circleCover.setColor(.8f,.8f,.8f,0.25f);
 		circleCover.setColor(0,0,0,0.25f);
 		circleCover.setDimensions(0, 0);
 		clickAnim = new ExpandAnimation(circleCover, 2f, new AnimationStatusListener()
@@ -568,6 +577,11 @@ public class dUICard extends dObject {
 	public boolean isVisible()
 	{
 		return isVisible;
+	}
+	
+	public int getObjectCount()
+	{
+		return objects.size();
 	}
 	
 	public dObject getObject(int index)

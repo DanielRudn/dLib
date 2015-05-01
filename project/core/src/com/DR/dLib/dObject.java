@@ -81,45 +81,59 @@ public abstract class dObject {
 	{
 			objSprite.setColor(objColor);
 	}
+	
+	/**
+	 * Called by dObject whenever the position is changed, used for the child class to change positon or do an action when position is changed
+	 * @param newX new X position
+	 * @param newY new X position
+	 */
+	protected void onPositionChanged(float newX, float newY)
+	{	}
 
 	/*===========================================================================
 	*									SETTERS								 	|
 	*===========================================================================*/
 	
-	public void setPosition(Vector2 pos)
-	{
-		position = pos;
-		objSprite.setPosition(position.x, position.y);
-	}
-	
 	public void setPosition(float x, float y)
 	{
 		position.set(x, y);
 		objSprite.setPosition(position.x, position.y);
+		onPositionChanged(x, y);
+	}
+	
+	public void setPosition(Vector2 pos)
+	{
+		setPosition(pos.x, pos.y);
+	//	position = pos;
+	//	objSprite.setPosition(position.x, position.y);
 	}
 	
 	public void setPos(Vector2 pos)
 	{
-		position = pos;
-		objSprite.setPosition(position.x, position.y);
+	//	position = pos;
+	//	objSprite.setPosition(position.x, position.y);
+		setPosition(pos.x, pos.y);
 	}
 	
 	public void setPos(float x, float y)
 	{
-		position.set(x,y);
-		objSprite.setPosition(position.x, position.y);
+	//	position.set(x,y);
+	//	objSprite.setPosition(position.x, position.y);
+		setPosition(x,y);
 	}
 	
 	public void setX(float x)
 	{
-		position.set(x, position.y);
-		objSprite.setPosition(position.x, position.y);
+	//	position.set(x, position.y);
+	//	objSprite.setPosition(position.x, position.y);
+		setPosition(x, getY());
 	}
 	
 	public void setY(float y)
 	{
-		position.set(position.x, y);
-		objSprite.setPosition(position.x, position.y);
+	//	position.set(position.x, y);
+	//	objSprite.setPosition(position.x, position.y);
+		setPosition(getX(), y);
 	}
 	
 	public void setColor(Color c)

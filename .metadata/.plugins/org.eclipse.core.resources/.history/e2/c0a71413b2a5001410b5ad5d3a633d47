@@ -1,0 +1,80 @@
+package com.DR.dLib;
+
+import com.DR.dLib.ui.dImage;
+import com.DR.dLib.ui.dUICard;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
+public class TestClass extends ApplicationAdapter{
+	SpriteBatch batch;
+	static Camera camera;
+	dImage test, test1, test2, test3, test4, test5, test6, test7,test8, test9, test10;
+	dUICard card;
+	
+	@Override
+	public void create () {
+		
+		batch = new SpriteBatch();
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		((OrthographicCamera) camera).setToOrtho(true, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		dValues.VW = 480;
+		dValues.VH = 640;
+		dValues.camera = camera;
+		
+		test = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test.setDimensions(64, 64);
+		test.setHasShadow(false);
+		test.setColor(Color.TEAL);
+		
+		test1 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test1.setDimensions(64, 64);
+		test1.setHasShadow(false);
+		test1.setColor(Color.GRAY);
+		
+		test2 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test2.setDimensions(64, 64);
+		test2.setHasShadow(false);
+		test2.setColor(Color.GREEN);
+		
+		test3 = new dImage(0f,0f,new Sprite(new Texture("card.png")));
+		test3.setDimensions(64, 64);
+		test3.setHasShadow(false);
+		test3.setColor(Color.RED);
+	
+		card = new dUICard(0,0,new Texture("card.png"));
+		card.setDimensions(480, 640);
+		
+		card.addObject(test, dUICard.LEFT, dUICard.TOP);
+		card.addObject(test1, dUICard.MID_LEFT, dUICard.TOP);
+		card.addObject(test2, dUICard.CENTER, dUICard.TOP);
+		card.addObject(test3, dUICard.MID_RIGHT, dUICard.TOP);
+	}
+
+	@Override
+	public void render () {
+		Gdx.gl.glClearColor(41f/256f, 128f/256f, 185f/256f,1f);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.setProjectionMatrix(camera.combined);
+
+		
+		batch.begin();
+		card.render(batch);
+		batch.end();
+
+	
+	}
+
+
+}
