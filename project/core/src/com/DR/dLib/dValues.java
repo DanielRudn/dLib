@@ -20,8 +20,7 @@ public class dValues {
 	{
 		setVirtualDimensions(virtualWidth, virtualHeight);
 		setCamera(cam);
-//		dText.GAME_FONT = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font_0.tga"),true);
-		dText.GAME_FONT = new BitmapFont(Gdx.files.external("\\Desktop\\font.fnt"), Gdx.files.external("\\Desktop\\font_0.tga"),true);
+		dText.GAME_FONT = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font_0.tga"),true);
 	}
 	
 	private static void setVirtualDimensions(float w, float h)
