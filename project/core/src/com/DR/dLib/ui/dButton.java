@@ -6,13 +6,13 @@ import com.DR.dLib.dValues;
 import com.DR.dLib.animations.AnimationStatusListener;
 import com.DR.dLib.animations.ExpandAnimation;
 import com.DR.dLib.animations.dAnimation;
+import com.DR.dLib.utils.dUtils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 
 public class dButton extends dObject implements AnimationStatusListener {
@@ -76,6 +76,31 @@ public class dButton extends dObject implements AnimationStatusListener {
 		clickCircle.setDimensions(0, 0);
 		circleAnimation = new ExpandAnimation(clickCircle, duration, this, CIRCLE_ANIM_ID, clickCircle.getColor(), getWidth()*2f);
 	}
+	
+	public dButton(float x, float y, Texture texture, dText text) {
+		super(x, y, texture);
+		buttonText = text;
+		bWidth = texture.getWidth();
+		bHeight = texture.getHeight();
+	}
+	
+	
+	public dButton(float x, float y, Texture texture, String text) {
+		this(x, y, texture, new dText(0, 0, 18f, text));
+	}
+	
+	public dButton(float x, float y, Texture texture, dText text, Texture circle, float duration) {
+		this(x, y, texture, text);
+		clickCircle = new dImage(getX(),getY(), circle);
+		clickCircle.setColor(.8f,.8f,.8f,0.25f);
+		clickCircle.setDimensions(0, 0);
+		circleAnimation = new ExpandAnimation(clickCircle, duration, this, CIRCLE_ANIM_ID, clickCircle.getColor(), getWidth()*2f);
+	}
+	
+	public dButton(float x, float y, Texture texture, String text, Texture circle, float duration) {
+		this(x, y, texture, new dText(0, 0, 18f, text), circle, duration);
+	}
+
 
 
 	/*===========================================================================
@@ -130,17 +155,13 @@ public class dButton extends dObject implements AnimationStatusListener {
 	
 	private void checkClicked()
 	{
-		if(getBoundingRectangle().contains(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH)) && Gdx.input.justTouched())
+		if(getBoundingRectangle().contains(dUtils.getVirtualMouseX(), dUtils.getVirtualMouseY()) && Gdx.input.justTouched())
 		{
 			if(circleAnimation != null && circleAnimation.isActive() == false)
 			{
 				circleAnimation.start();
-				clicked = true;
 			}
-			else if(circleAnimation == null)
-			{
-				clicked = true;
-			}
+			clicked = true;
 		//	setAlpha(.6f);
 		}
 		else
@@ -159,6 +180,14 @@ public class dButton extends dObject implements AnimationStatusListener {
 		this.enabled = enabled;
 	}
 	
+	@Override
+	protected void onPositionChanged(float x, float y)
+	{
+		position.set(x, y);
+		getSprite().setPosition(position.x, position.y);
+		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
+	}
+	/*
 	@Override
 	public void setPosition(Vector2 pos)
 	{
@@ -205,7 +234,7 @@ public class dButton extends dObject implements AnimationStatusListener {
 		position.set(position.x, y);
 		getSprite().setPosition(position.x, position.y);
 		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
-	}
+	}*/
 	
 	@Override
 	public void setAlpha(float a)
@@ -277,12 +306,16 @@ public class dButton extends dObject implements AnimationStatusListener {
 	{
 		return buttonText.getText();
 	}
+	
+	/*===========================================================================
+	*						 	ANIMATION LISTENER								|
+	*===========================================================================*/
 
 	@Override
 	public void onAnimationStart(int ID, float duration) {
 		if(ID == CIRCLE_ANIM_ID)
 		{
-			clickCircle.setPos(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)) - getWidth() / 2f,dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH) - getHeight());
+			clickCircle.setPos(dUtils.getVirtualMouseX() - getWidth() / 2f, dUtils.getVirtualMouseY() - getHeight());
 		}
 	}
 

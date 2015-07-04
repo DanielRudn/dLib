@@ -10,7 +10,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 
 public class dToggle extends dObject implements AnimationStatusListener {
 
@@ -23,7 +22,7 @@ public class dToggle extends dObject implements AnimationStatusListener {
 		super(x,y, backTexture);
 		getSprite().setSize(64f, 24f);
 		slider = new dImage(x,y, sliderTexture);
-		slider.setDimensions(32f, 32f);
+		slider.setDimensions(38f,38f);
 		slider.setY(y + 12f - slider.getHeight()/2f);
 		slider.setHasShadow(true);
 		enabled = false;
@@ -67,45 +66,9 @@ public class dToggle extends dObject implements AnimationStatusListener {
 	}
 	
 	@Override
-	public void setPosition(Vector2 pos)
+	protected void onPositionChanged(float x, float y)
 	{
-		super.setPosition(pos);
-		updateSliderPosition(pos.x,pos.y);
-	}
-	
-	@Override
-	public void setPosition(float x, float y)
-	{
-		super.setPosition(x, y);
-		updateSliderPosition(x,y);
-	}
-	
-	@Override
-	public void setPos(Vector2 pos)
-	{
-		super.setPos(pos);
-		updateSliderPosition(pos.x, pos.y);
-	}
-	
-	@Override
-	public void setPos(float x, float y)
-	{
-		super.setPos(x, y);
 		updateSliderPosition(x, y);
-	}
-	
-	@Override
-	public void setX(float x)
-	{
-		super.setX(x);
-		updateSliderPosition(x, getY());
-	}
-	
-	@Override
-	public void setY(float y)
-	{
-		super.setY(y);
-		updateSliderPosition(getX(), y);
 	}
 	
 	@Override
@@ -168,7 +131,7 @@ public class dToggle extends dObject implements AnimationStatusListener {
 	}
 
 	@Override
-	public void onAnimationStart(int ID, float duration) {}
+	public void onAnimationStart(int ID, float duration) { }
 
 	@Override
 	public void whileAnimating(int ID, float time, float duration, float delta) {
@@ -192,6 +155,6 @@ public class dToggle extends dObject implements AnimationStatusListener {
 	}
 
 	@Override
-	public void onAnimationFinish(int ID) {}
+	public void onAnimationFinish(int ID) { }
 
 }

@@ -8,16 +8,16 @@ import com.DR.dLib.dValues;
 import com.DR.dLib.animations.AnimationStatusListener;
 import com.DR.dLib.animations.ExpandAnimation;
 import com.DR.dLib.animations.dAnimation;
+import com.DR.dLib.utils.dUtils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 
-public class dUICard extends dObject {
+public class dUICard extends dObject implements AnimationStatusListener {
 	
 	/*===========================================================================
 	*								VARIABLES								 	|
@@ -29,6 +29,8 @@ public class dUICard extends dObject {
 	public static final byte CENTER = 1; 
 	// VERTICAL  PLACEMENT IDENTIFIERS
 	public static final byte TOP = 3, BOTTOM = 4, TOP_NO_PADDING = 6, BOTTOM_NO_PADDING = 8;
+	// Shadow distance from X,Y position
+	private static final float SHADOW_DISTANCE = 4f;
 	// Dimensions of the card
 	private float cardWidth, cardHeight;
 	// padding between objects 
@@ -54,54 +56,25 @@ public class dUICard extends dObject {
 	
 	public dUICard(Vector2 pos, Texture texture)
 	{
-		super(pos,texture);
-	}
-
-	public dUICard(Vector2 pos, Sprite sprite)
-	{
-		super(pos,sprite);
-	}
-	
-	public dUICard(Vector2 pos, Texture texture, float width, float height)
-	{
-		super(pos,texture);
-		cardWidth = width;
-		cardHeight = height;
-		setDimensions(width,height);
-	}
-	
-	public dUICard(Vector2 pos, Sprite sprite, float width, float height)
-	{
-		super(pos,sprite);
-		cardWidth = width;
-		cardHeight = height;
-		setDimensions(width,height);
+		super(pos, texture);
 	}
 	
 	public dUICard(float x, float y, Texture texture)
 	{
-		super(x,y,texture);
+		super(x, y, texture);
 	}
 	
-	public dUICard(float x, float y, Sprite sprite)
+	public dUICard(Vector2 pos, Texture texture, float width, float height)
 	{
-		super(x,y,sprite);
+		this(pos, texture);
+		cardWidth = width;
+		cardHeight = height;
+		setDimensions(width,height);
 	}
 	
 	public dUICard(float x, float y, Texture texture, float width, float height)
 	{
-		super(x,y,texture);
-		cardWidth = width;
-		cardHeight = height;
-		setDimensions(width,height);
-	}
-	
-	public dUICard(float x, float y, Sprite sprite, float width, float height)
-	{
-		super(x,y,sprite);
-		cardWidth = width;
-		cardHeight = height;
-		setDimensions(width,height);
+		this(new Vector2(x, y), texture, width, height);
 	}
 	
 	/*===========================================================================
@@ -183,7 +156,6 @@ public class dUICard extends dObject {
 			}
 			if(clickAnim != null && clickAnim.isActive())
 			{
-				System.out.println("updating clickAnim");
 				clickAnim.update(delta);
 			}
 			for(int x = 0; x < objects.size(); x++)
@@ -205,7 +177,7 @@ public class dUICard extends dObject {
 				if(hasShadow)
 				{
 					getSprite().setColor(SHADOW_COLOR);
-					getSprite().setPosition(getX()+4, getY()+4);
+					getSprite().setPosition(getX() + SHADOW_DISTANCE, getY() + SHADOW_DISTANCE);
 					getSprite().draw(batch);
 				}
 				batch.flush();
@@ -242,7 +214,7 @@ public class dUICard extends dObject {
 				if(hasShadow)
 				{
 					getSprite().setColor(SHADOW_COLOR);
-					getSprite().setPosition(getX()+4, getY()+4);
+					getSprite().setPosition(getX() + SHADOW_DISTANCE, getY() + SHADOW_DISTANCE);
 					getSprite().draw(batch);
 				
 					setColor(getColor());
@@ -288,7 +260,7 @@ public class dUICard extends dObject {
 	
 	private void checkClicked()
 	{
-		if(getBoundingRectangle().contains(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)),dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH)) && Gdx.input.justTouched())
+		if(getBoundingRectangle().contains(dUtils.getVirtualMouseX(), dUtils.getVirtualMouseY()) && Gdx.input.justTouched())
 		{
 			isClicked = true;
 			if(circleCover == null)
@@ -298,7 +270,6 @@ public class dUICard extends dObject {
 			else
 			{
 				clickAnim.start();
-				System.out.println("clickAnim Started");
 			}
 		}
 		else
@@ -363,8 +334,8 @@ public class dUICard extends dObject {
 	
 	private void alignObject(dObject object, byte xAlign, byte yAlign)//gets an objects position relative to the card depending on align attributes
 	{
-		alignObjectX(object,xAlign);
-		alignObjectY(object,yAlign);
+		alignObjectX(object, xAlign);
+		alignObjectY(object, yAlign);
 	}
 	
 	protected void updateObjectPosition()
@@ -423,31 +394,13 @@ public class dUICard extends dObject {
 	public void setClickable(boolean click, Texture circle)
 	{
 		clickable = click;
-		circleCover = new dImage(getX(), getY(),circle);
-		circleCover.setColor(0,0,0,0.25f);
-		circleCover.setDimensions(0, 0);
-		clickAnim = new ExpandAnimation(circleCover, 2f, new AnimationStatusListener()
+		if(clickable)
 		{
-
-			@Override
-			public void onAnimationStart(int ID, float duration) {
-				circleCover.setPos(dValues.camera.position.x-dValues.VW/2f + (Gdx.input.getX() / (Gdx.graphics.getWidth() / dValues.VW)) - getWidth() / 2f,dValues.camera.position.y-dValues.VH/2f + Gdx.input.getY() / (Gdx.graphics.getHeight() / dValues.VH) - getHeight());
-			}
-
-			@Override
-			public void whileAnimating(int ID, float time, float duration,float delta) {
-				if(time < duration/2f)
-				{
-					circleCover.setAlpha(dTweener.LinearEase(time, .25f, -.25f, duration/2f));
-				}
-			}
-
-			@Override
-			public void onAnimationFinish(int ID) {
-				
-			}
-			
-		}, CIRCLE_ANIM_ID, circleCover.getColor(), getWidth()*2f);
+			circleCover = new dImage(getX(), getY(), circle);
+			circleCover.setColor(0.8f,0.8f,0.8f,0.25f);
+			circleCover.setDimensions(0, 0);
+			clickAnim = new ExpandAnimation(circleCover, 2.5f, this, CIRCLE_ANIM_ID, circleCover.getColor(), getWidth()*2f);
+		}
 	}
 	
 	public void setWidth(float width)
@@ -593,4 +546,33 @@ public class dUICard extends dObject {
 	{
 		return paddingLeft;
 	}
+	
+	/*===========================================================================
+	*							Animation Listener								 |
+	*===========================================================================*/
+	
+	@Override
+	public void onAnimationStart(int ID, float duration) {
+		if(ID == this.CIRCLE_ANIM_ID)
+		{
+			circleCover.setPos(dUtils.getVirtualMouseX() - getWidth() / 8f, dUtils.getVirtualMouseY() - getHeight() / 2f);
+		}
+	}
+
+	@Override
+	public void whileAnimating(int ID, float time, float duration,float delta) {
+		if(ID == this.CIRCLE_ANIM_ID)
+		{
+			if(time < duration/2f)
+			{
+				circleCover.setAlpha(dTweener.LinearEase(time, .25f, -.25f, duration/2f));
+			}
+		}
+	}
+
+	@Override
+	public void onAnimationFinish(int ID) {
+		
+	}
+	
 }

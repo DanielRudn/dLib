@@ -60,6 +60,7 @@ public class GoogleDocGrabber implements HttpResponseListener {
 		return connected;
 	}
 	
+	// TODO: fix
 	@Override
 	public void handleHttpResponse(HttpResponse httpResponse) {
 		docText = httpResponse.getResultAsString();

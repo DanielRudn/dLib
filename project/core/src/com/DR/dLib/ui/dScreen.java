@@ -16,6 +16,20 @@ public abstract class dScreen extends dUICard {
 		setHasShadow(false);
 	}
 	
+	@Override
+	public void update(float delta)
+	{
+		super.update(delta);
+		if(showAnimation != null && showAnimation.isActive())
+		{
+			showAnimation.update(delta);
+		}
+		else if(hideAnimation != null && hideAnimation.isActive())
+		{
+			hideAnimation.update(delta);
+		}
+	}
+	
 	/**
 	 * User clicked back button
 	 */
@@ -55,10 +69,13 @@ public abstract class dScreen extends dUICard {
 	@Override
 	public void hide()
 	{
-		super.hide();
 		if(hideAnimation != null)
 		{
 			hideAnimation.start();
+		}
+		else
+		{
+			super.hide();
 		}
 	}
 	
@@ -71,10 +88,5 @@ public abstract class dScreen extends dUICard {
 	{
 		return isPaused;
 	}
-	
-	/*
-	 * WARNING: WHEN OVERRIDING UPDATE AND RENDER METHODS MAKE SURE TO CALL super(...) TO UPDATE AND RENDER THE REGULAR DUICARD STUFF
-	 */
-
 }
 

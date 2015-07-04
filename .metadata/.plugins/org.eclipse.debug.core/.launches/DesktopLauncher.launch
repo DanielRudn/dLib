@@ -8,5 +8,4 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.DR.dLib.desktop.DesktopLauncher"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="dLib-desktop"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:dLib-android/assets}"/>
 </launchConfiguration>

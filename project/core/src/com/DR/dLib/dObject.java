@@ -28,46 +28,35 @@ public abstract class dObject {
 		position = pos;
 	}
 	
-	public dObject(Vector2 pos, Texture texture)
-	{
-		position = pos;
-		objTexture = texture;
-		objSprite = new Sprite(texture);
-		objSprite.setPosition(position.x, position.y);
-		objSprite.flip(false,true);
-	}
-	
 	public dObject(Vector2 pos, Sprite sprite)
 	{
-		position = pos;
+		this(pos);
 		objTexture = sprite.getTexture();
 		objSprite = sprite;
-		objSprite.setPosition(position.x, position.y);
-		objSprite.flip(false,true);
-	}
-	
-	public dObject(float x, float y)
-	{
-		position = new Vector2(x,y);
-	}
-	
-	public dObject(float x, float y, Texture texture)
-	{
-		position = new Vector2(x,y);
-		objTexture = texture;
-		objSprite = new Sprite(texture);
 		objSprite.setPosition(position.x, position.y);
 		objSprite.flip(false,true);
 	}
 	
 	public dObject(float x, float y, Sprite sprite)
 	{
-		position = new Vector2(x,y);
-		objTexture = sprite.getTexture();
-		objSprite = sprite;
-		objSprite.setPosition(position.x, position.y);
-		objSprite.flip(false,true);
+		this(new Vector2(x, y), sprite);
 	}
+	
+	public dObject(Vector2 pos, Texture texture)
+	{
+		this(pos, new Sprite(texture));
+	}
+	
+	public dObject(float x, float y)
+	{
+		this(new Vector2(x, y));
+	}
+	
+	public dObject(float x, float y, Texture texture)
+	{
+		this(new Vector2(x, y), texture);
+	}	
+	
 	
 	/*===========================================================================
 	*									METHODS								 	|
@@ -79,7 +68,7 @@ public abstract class dObject {
 	
 	private void applyColor()
 	{
-			objSprite.setColor(objColor);
+		objSprite.setColor(objColor);
 	}
 	
 	/**
@@ -104,35 +93,25 @@ public abstract class dObject {
 	public void setPosition(Vector2 pos)
 	{
 		setPosition(pos.x, pos.y);
-	//	position = pos;
-	//	objSprite.setPosition(position.x, position.y);
 	}
 	
 	public void setPos(Vector2 pos)
 	{
-	//	position = pos;
-	//	objSprite.setPosition(position.x, position.y);
 		setPosition(pos.x, pos.y);
 	}
 	
 	public void setPos(float x, float y)
 	{
-	//	position.set(x,y);
-	//	objSprite.setPosition(position.x, position.y);
 		setPosition(x,y);
 	}
 	
 	public void setX(float x)
 	{
-	//	position.set(x, position.y);
-	//	objSprite.setPosition(position.x, position.y);
 		setPosition(x, getY());
 	}
 	
 	public void setY(float y)
 	{
-	//	position.set(position.x, y);
-	//	objSprite.setPosition(position.x, position.y);
 		setPosition(getX(), y);
 	}
 	
@@ -193,6 +172,11 @@ public abstract class dObject {
 		objSprite.setOriginCenter();
 	}
 	
+	public void setRotation(float degrees)
+	{
+		objSprite.setRotation(degrees);
+	}
+	
 	/*===========================================================================
 	*									GETTERS								 	|
 	*===========================================================================*/
@@ -225,6 +209,11 @@ public abstract class dObject {
 	public Texture getTexture()
 	{
 		return objTexture;
+	}
+	
+	public float getRotation()
+	{
+		return objSprite.getRotation();
 	}
 	
 	public Sprite getSprite()

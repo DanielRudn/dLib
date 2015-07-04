@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import com.DR.dLib.dObject;
 import com.DR.dLib.dTweener;
+import com.badlogic.gdx.math.Vector2;
 
 public class SlideInOrderAnimation extends dAnimation {
 
-	private float deltaX = 0;
-	private ArrayList<Float> startPos;
+	private float deltaX = 0, deltaY = 0;
+	private ArrayList<Vector2> startPos;
 	// delay between each object
 	private final float ITEM_DELAY = .1f;
 	
@@ -19,11 +20,17 @@ public class SlideInOrderAnimation extends dAnimation {
 	 * @param ID
 	 * @param objectToAnimate
 	 */
-	public SlideInOrderAnimation(float duration, AnimationStatusListener listener, int ID, float deltaX, dObject[] objectToAnimate) 
+	public SlideInOrderAnimation(float duration, AnimationStatusListener listener, int ID, float deltaX, dObject... objectToAnimate) 
 	{
 		super(duration, listener, ID, objectToAnimate);
 		this.deltaX = deltaX;
-		startPos = new ArrayList<Float>();
+		startPos = new ArrayList<Vector2>();
+	}
+	
+	public SlideInOrderAnimation(float duration, AnimationStatusListener listener, int ID, float deltaX, float deltaY, dObject... objectToAnimate) 
+	{
+		this(duration, listener, ID, deltaX, objectToAnimate);
+		this.deltaY = deltaY;
 	}
 
 	@Override
@@ -33,7 +40,8 @@ public class SlideInOrderAnimation extends dAnimation {
 		{
 			if(time - x * ITEM_DELAY >= 0)
 			{
-				getAnimatedObjects()[x].setX(dTweener.ElasticOut(time - x * ITEM_DELAY, startPos.get(x), deltaX, duration - x * ITEM_DELAY, 6f));
+				getAnimatedObjects()[x].setX(dTweener.ElasticOut(time - x * ITEM_DELAY, startPos.get(x).x, deltaX, duration - x * ITEM_DELAY, 6f));
+				getAnimatedObjects()[x].setY(dTweener.ElasticOut(time - x * ITEM_DELAY, startPos.get(x).y, deltaY, duration - x * ITEM_DELAY, 6f));
 			}
 		}
 	}
@@ -45,7 +53,7 @@ public class SlideInOrderAnimation extends dAnimation {
 		startPos.clear();
 		for(int x = 0; x < getAnimatedObjects().length; x++)
 		{
-			startPos.add(getAnimatedObjects()[x].getX());
+			startPos.add(new Vector2(getAnimatedObjects()[x].getPos()));
 		}
 	}
 

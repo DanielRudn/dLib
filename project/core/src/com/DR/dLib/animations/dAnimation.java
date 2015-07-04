@@ -75,7 +75,7 @@ public abstract class dAnimation {
 	
 	public boolean isFinished()
 	{
-		return !isActive;
+		return !isActive && currentTime >= duration;
 	}
 
 }

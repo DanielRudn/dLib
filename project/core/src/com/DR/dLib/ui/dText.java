@@ -14,9 +14,9 @@ public class dText extends dObject {
 	*								VARIABLES								 	|
 	*===========================================================================*/
 	
-//	public static final BitmapFont GAME_FONT = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font_0.tga"),true);
-	public static final BitmapFont GAME_FONT = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font_0.tga"),true);
-	public static final float FONT_SIZE = 128f; // size of the bitmap font that was decided on creation of the font.fnt file.
+//	public static BitmapFont GAME_FONT = new BitmapFont(Gdx.files.internal("font.fnt"), Gdx.files.internal("font_0.tga"),true);
+	public static BitmapFont GAME_FONT = new BitmapFont(Gdx.files.external("\\Desktop\\font.fnt"), Gdx.files.external("\\Desktop\\font_0.tga"),true);
+	private static final float FONT_SIZE = 128f; // size of the bitmap font that was decided on creation of the font.fnt file.
 	private String text;
 	private float fontScale = FONT_SIZE;
 	private boolean shadow = false;
@@ -31,34 +31,25 @@ public class dText extends dObject {
 		super(x, y);
 		this.text = text;
 		setColor(Color.BLACK);//default color
-		setIntegerPositions();
 		setUpdatable(false);
+		GAME_FONT.setMarkupEnabled(true);
+		GAME_FONT.setOwnsTexture(true);
+		GAME_FONT.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 	}
 	
 	public dText(float x, float y, float size, String text) {
-		super(x, y);
-		this.text = text;
+		this(x, y, text);
 		fontScale = size;
-		setColor(Color.BLACK);//default color
-		setIntegerPositions();
-		setUpdatable(false);
 	}
 	
 	public dText(float x, float y, String text, Color c) {
-		super(x, y);
-		this.text = text;
+		this(x, y, text);
 		setColor(c);
-		setIntegerPositions();
-		setUpdatable(false);
 	}
 	
 	public dText(float x, float y, float size, String text, Color c) {
-		super(x, y);
-		this.text = text;
-		fontScale = size;
+		this(x, y, size, text);
 		setColor(c);
-		setIntegerPositions();
-		setUpdatable(false);
 	}
 	
 	
@@ -102,12 +93,6 @@ public class dText extends dObject {
 				GAME_FONT.draw(batch, text, getX(), getY());
 			}
 		}
-	}
-	
-	private void setIntegerPositions()
-	{
-		GAME_FONT.setUseIntegerPositions(true);
-		GAME_FONT.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 	}
 	
 	/*===========================================================================
