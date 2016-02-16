@@ -1,7 +1,6 @@
 # dLib #
 
 A lightweight UI and animation library for the LibGDX framework.
-
 ### What is dLib? ###
 
 * A library for creating UI and other components for LibGDX Games
