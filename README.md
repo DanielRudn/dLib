@@ -1,11 +1,10 @@
-# README #
+# dLib #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+A lightweight UI and animation library for the LibGDX framework.
 
-### What is this repository for? ###
+### What is dLib? ###
 
 * A library for creating UI and other components for LibGDX Games
-* Version 1.0
 
 ### How to use this library: ###
 
