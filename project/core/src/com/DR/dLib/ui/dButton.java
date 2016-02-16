@@ -123,16 +123,6 @@ public class dButton extends dObject implements AnimationStatusListener {
 	public void render(SpriteBatch batch) {
 		if(clickCircle != null)
 		{
-			/*
-			Gdx.gl.glEnable(GL20.GL_SCISSOR_TEST);
-			Gdx.gl.glScissor((int)getX(),(int)(dValues.camera.position.y + dValues.VH /2f - getY() - getHeight()), (int)getWidth(),	(int)getHeight());
-			getSprite().draw(batch);
-			buttonText.render(batch);
-			clickCircle.render(batch);
-	
-			batch.flush();
-			Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
-			*/
 			batch.flush();
 			clip.set(getX(), getY(), getWidth(), getHeight());
 			ScissorStack.calculateScissors(dValues.camera, batch.getTransformMatrix(), clip,  scissors);
@@ -187,54 +177,6 @@ public class dButton extends dObject implements AnimationStatusListener {
 		getSprite().setPosition(position.x, position.y);
 		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
 	}
-	/*
-	@Override
-	public void setPosition(Vector2 pos)
-	{
-		position = pos;
-		getSprite().setPosition(position.x, position.y);
-		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
-	}
-	
-	@Override
-	public void setPosition(float x, float y)
-	{
-		position.set(x, y);
-		getSprite().setPosition(position.x, position.y);
-		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
-	}
-	
-	@Override
-	public void setPos(Vector2 pos)
-	{
-		position = pos;
-		getSprite().setPosition(position.x, position.y);
-		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
-	}
-	
-	@Override
-	public void setPos(float x, float y)
-	{
-		position.set(x,y);
-		getSprite().setPosition(position.x, position.y);
-		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
-	}
-	
-	@Override
-	public void setX(float x)
-	{
-		position.set(x, position.y);
-		getSprite().setPosition(position.x, position.y);
-		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
-	}
-	
-	@Override
-	public void setY(float y)
-	{
-		position.set(position.x, y);
-		getSprite().setPosition(position.x, position.y);
-		buttonText.setPos(position.x + getWidth()/2f - buttonText.getWidth()/2f, position.y + getHeight()/2f - buttonText.getHeight()/2f);
-	}*/
 	
 	@Override
 	public void setAlpha(float a)
